@@ -3,6 +3,7 @@ import "./App.css";
 import styled from "styled-components";
 import tw from "twin.macro";
 import HomePage from "./app/containers/HomePage";
+import AuthContext from "./context/auth-context";
 
 const AppContainer = styled.div`
   ${tw`
@@ -16,10 +17,11 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer>
-      <HomePage />
+      <AuthContext.Provider>
+        <HomePage />
+      </AuthContext.Provider>
     </AppContainer>
   );
 }
-
 
 export default App;
