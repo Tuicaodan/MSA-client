@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import SubmitForm from "../../components/submtForm";
 
 
 const PageContainer = styled.div`
@@ -16,7 +17,7 @@ const PageContainer = styled.div`
 
 function HomePage() {
   return <PageContainer>
-    <p>content area</p>
+    <SubmitForm />
   </PageContainer>;
 };
 
