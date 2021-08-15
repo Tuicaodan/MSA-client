@@ -4,7 +4,6 @@ import tw from "twin.macro";
 import Logo from "../logo";
 import NavItems from "./navItems";
 
-
 const NavbarContainer = styled.div`
   min-height: 68px;
   ${tw`
@@ -21,15 +20,14 @@ const NavbarContainer = styled.div`
 const LogoContainer = styled.div``;
 
 const NavBar = () => {
-
-    
-
-  return <NavbarContainer>
+  return (
+    <NavbarContainer>
       <LogoContainer>
-          <Logo />
+        <Logo />
       </LogoContainer>
       <NavItems />
-  </NavbarContainer>;
-}
+    </NavbarContainer>
+  );
+};
 
 export default NavBar;

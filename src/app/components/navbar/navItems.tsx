@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
@@ -6,6 +6,8 @@ import { slide as Menu } from "react-burger-menu";
 import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../responsive";
 import menuStyles from "./menuStyles";
+import { useAuthContext } from "../../../context/AuthContext";
+import NavUserProfile from "./navUserProfile";
 
 const ListContainer = styled.ul`
   ${tw`
@@ -44,6 +46,8 @@ const NavItems = () => {
   const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 
   //const [data, setData] = useState({ errorMessage: "", isLoading: false });
+  const { authUser, login, isLogin, logout } = useAuthContext();
+  console.log(authUser);
 
   useEffect(() => {
     const loginMethod = async () => {
@@ -72,8 +76,17 @@ const NavItems = () => {
               return res.json();
             })
             .then((resData) => {
-              const loginedUser = JSON.parse(resData.data["login"]);  
-              console.log(loginedUser);
+              const loginedUser = JSON.parse(resData.data["login"]);
+              if(loginedUser===null){
+                throw new Error("No user retrieved from github");
+              }
+              const AuthUser = {
+                userId: loginedUser.id,
+                username: loginedUser.username,
+                avatar_url: loginedUser.avatar_url,
+              };
+              login(AuthUser);
+              localStorage.setItem("token", loginedUser.jwy_token)
             });
         } catch (err) {
           console.log(err);
@@ -83,34 +96,65 @@ const NavItems = () => {
     loginMethod();
   }, []);
 
-  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
 
-  if (isMobile)
-    return (
-      <Menu right styles={menuStyles}>
-        <ListContainer>
-          <NavItem menu>
-            <a href="./">Home</a>
-          </NavItem>
-          <NavItem menu>Login</NavItem>
-          <NavItem menu>About</NavItem>
-        </ListContainer>
-      </Menu>
-    );
+  const logoutHandler = () => {
+    
+    logout();
+  }
+  //const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
 
+  // if (isMobile)
+  //   return (
+  //     <Menu right styles={menuStyles}>
+  //       <ListContainer>
+  //         <NavItem menu>
+  //           <a href="./">Home</a>
+  //         </NavItem>
+  //         <NavItem menu>Login</NavItem>
+  //         <NavItem menu>Post</NavItem>
+  //       </ListContainer>
+  //     </Menu>
+  //   );
+
+  //without token checking
+  // return (
+  //   <ListContainer>
+  //     <NavItem>
+  //       <a href="./">Home</a>
+  //     </NavItem>
+
+  //     <NavItem>
+  //       <a
+  //         href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
+  //       >
+  //         Login
+  //       </a>
+  //     </NavItem>
+
+  //     <NavItem>Post</NavItem>
+  //   </ListContainer>
+  // );
   return (
     <ListContainer>
-      <NavItem>
-        <a href="./">Home</a>
-      </NavItem>
-      <NavItem>
-        <a
-          href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
-        >
-          Login
-        </a>
-      </NavItem>
-      <NavItem>About</NavItem>
+      {isLogin && (
+        <NavItem>
+          <NavUserProfile
+            username={authUser.username}
+            avatar_url={authUser.avatar_url}
+          />
+        </NavItem>
+      )}
+      {!isLogin && (
+        <NavItem>
+          <a
+            href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
+          >
+            Login
+          </a>
+        </NavItem>
+      )}
+      {isLogin && <NavItem>Post</NavItem>}
+      {isLogin && <NavItem><a href='javascript:void(0)' onClick={logoutHandler}>Logout</a></NavItem>}
     </ListContainer>
   );
 };
