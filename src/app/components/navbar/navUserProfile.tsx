@@ -9,20 +9,24 @@ const ProfileContainer = styled.div`
     flex-row
     items-center
     justify-between
+    w-40
 `}
 `;
 const Image = styled.div`
   ${tw`
-    h-5
-    w-5
+    h-12
+    w-12
     rounded-full
     m-1
 `}
 `;
 const UsernameContainer = styled.div`
   ${tw`
-    h-5
-    text-sm
+    h-7
+    text-xl
+    my-auto
+    flex
+    justify-center
 `}
 `;
 
@@ -32,16 +36,15 @@ interface NavUserProfileProps {
 }
 
 const NavUserProfile: FC<NavUserProfileProps> = ({ username, avatar_url }) => {
-    avatar_url = (avatar_url) ? avatar_url: ""
+  avatar_url = avatar_url ? avatar_url : "";
   return (
     <ProfileContainer>
       <Image>
-        <img src={avatar_url} alt="user avatar" />
+        <img src={avatar_url}/>
       </Image>
-      <UsernameContainer>
-          {username}
-      </UsernameContainer>
-    </ProfileContainer>  );
+      <UsernameContainer>{username}</UsernameContainer>
+    </ProfileContainer>
+  );
 };
 
 export default NavUserProfile;

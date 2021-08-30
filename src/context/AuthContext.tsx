@@ -1,5 +1,17 @@
 import React, { useState, createContext, FC, useContext } from "react";
-import { IUser, AuthContextState } from "./types";
+
+interface IUser {
+  userId: string | null;
+  username: string | null;
+  avatar_url: string | null;
+}
+
+type AuthContextState = {
+  authUser: IUser;
+  isLogin: boolean;
+  login: (user: IUser) => void;
+  logout: () => void;
+};
 
 const contextDefaultValues: AuthContextState = {
   authUser: {
@@ -31,6 +43,7 @@ const AuthContextProvider: FC = ({ children }) => {
   const logout = () => {
     setAuthUser(contextDefaultValues.authUser);
     setIsLogin(false);
+    localStorage.removeItem("token");
   };
 
   return (

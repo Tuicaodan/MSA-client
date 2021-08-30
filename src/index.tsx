@@ -13,9 +13,7 @@ ReactDOM.render(
   <Router>
     <ApolloProvider client={graphQLClient}>
       <React.StrictMode>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <App />
       </React.StrictMode>
     </ApolloProvider>
   </Router>,
