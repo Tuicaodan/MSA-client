@@ -14,28 +14,46 @@ const AppContainer = styled.div`
     w-full
     h-full
     flex
-    flex-col
+    flex-row
   `}
+`;
+
+const MainContentContaner = styled.div`
+  ${tw`
+  w-full
+  md:w-3/4
+  flex
+  flex-col
+`}
+`;
+
+const UserContentContainer = styled.div`
+  ${tw`
+  hidden
+  md:flex
+  md:w-1/4
+  md:flex-col
+`}
 `;
 
 const App = () => {
   return (
-    <AppContainer>
-      <AuthContextProvider>
-        <NavBar />
-        <PostsContextProvider>
-        <Switch>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-        <Route
-          path="/home"
-          render={() => <HomePage />}
-        />
-        </Switch>
-        </PostsContextProvider>
-      </AuthContextProvider>
-    </AppContainer>
+    <AuthContextProvider>
+      <NavBar />
+      <AppContainer>
+        <MainContentContaner>
+          <PostsContextProvider>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+              <Route path="/home" render={() => <HomePage />} />
+            </Switch>
+          </PostsContextProvider>
+        </MainContentContaner>
+        <UserContentContainer>user info here</UserContentContainer>
+      </AppContainer>
+    </AuthContextProvider>
   );
 };
 

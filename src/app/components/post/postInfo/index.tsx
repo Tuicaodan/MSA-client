@@ -24,10 +24,11 @@ const InfoContainer = styled.div`
   ${tw`
       w-full
       flex
-      flex-row
+      flex-col
       justify-start
       ml-0
       my-4
+      px-5
   `}
   h2 {
     ${tw`
@@ -47,64 +48,14 @@ const InfoContainer = styled.div`
   }
 `;
 
-const LeftInfoContainer = styled.div`
-  ${tw`
-  w-3/4
-  text-left
-  my-auto
-  pl-5
-  flex
-  flex-col
-  justify-center
-`}
-`;
-
-const RighttInfoContainer = styled.div`
-  ${tw`
-  w-1/5
-  text-left
-  my-auto
-  pl-5
-  flex
-  flex-row
-  justify-items-start
-`}
-`;
-
-const Image = styled.div`
-  ${tw`
-    h-12
-    w-12
-    rounded-full
-    m-1
-    overflow-hidden
-`}
-`;
-const UsernameContainer = styled.div`
-  ${tw`
-    my-auto
-    flex
-    justify-center
-`}
-`;
-
-const Info: FC<InfoProps> = ({ postInfo, authorInfo }: InfoProps) => {
+const Info: FC<InfoProps> = ({ postInfo }: InfoProps) => {
   const date = new Date(parseInt(postInfo.createdAt)).toLocaleDateString();
 
   return (
     <InfoContainer>
-      <LeftInfoContainer>
-        <h2>{postInfo.title}</h2>
-        <h6>Posted on: {date}</h6>
-        <p>{postInfo.description}</p>
-      </LeftInfoContainer>
-
-      <RighttInfoContainer>
-        <Image>
-          <img src={authorInfo.avatar_url} />
-        </Image>
-        <UsernameContainer>{authorInfo.username}</UsernameContainer>
-      </RighttInfoContainer>
+      <h2>{postInfo.title}</h2>
+      <h6>Posted on: {date}</h6>
+      <p>{postInfo.description}</p>
     </InfoContainer>
   );
 };

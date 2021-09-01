@@ -3,6 +3,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import Info from "./postInfo";
 import Video from "./video";
+import PostHeader from "./postHeader";
 
 interface IUser {
   id: string;
@@ -36,7 +37,8 @@ const CardContainer = styled.div`
     flex-col
     rounded-b-lg
     shadow-md
-    mx-5
+    mx-10
+    md:mx-2
     my-4
 `}
 `;
@@ -59,6 +61,7 @@ const PostCard: FC<any> = ({ post }: PostProps) => {
 
   return (
     <CardContainer>
+      <PostHeader postInfo={postInfo} authorInfo={authorInfo}/>
       <Video youtube_url={youtube_url} />
       <Info postInfo={postInfo} authorInfo={authorInfo} />
     </CardContainer>

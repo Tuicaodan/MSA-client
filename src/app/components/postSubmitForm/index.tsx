@@ -7,10 +7,10 @@ import { usePostsContext } from "../../../context/PostsContext";
 
 const FormContainer = styled.div`
   ${tw`
-        w-2/3
-        md:w-1/2
-        p-5
- 
+        w-full
+        md:w-3/4
+        py-5
+        px-0
     `};
 `;
 
@@ -18,9 +18,10 @@ const SubmissionForm = styled.form`
   ${tw`
         flex
         flex-col
-        m-2
+        mx-10
+    md:mx-2
         shadow-lg    
-        px-4   
+        px-2   
         py-2
         bg-gray-100
         rounded
@@ -100,7 +101,6 @@ const SubmitForm = () => {
     const hasUrl = isYoutubeUrl(youtubeUrl);
     const hasDescription = postDescription !== "";
 
-
     if (!hasTitle || !hasUrl || !hasDescription) {
       alert("missing something");
     }
@@ -124,7 +124,7 @@ const SubmitForm = () => {
         //console.log("This is the return data after add post: ")
         //console.log(returnedData);
         const returnedPost = returnedData.data.addPost;
-        updatePostState(returnedPost)
+        updatePostState(returnedPost);
         //console.log(returnedPost)
       } catch (err) {
         console.log("This is the addPost error: " + err);
