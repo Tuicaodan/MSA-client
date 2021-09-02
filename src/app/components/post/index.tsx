@@ -4,6 +4,7 @@ import tw from "twin.macro";
 import Info from "./postInfo";
 import Video from "./video";
 import PostHeader from "./postHeader";
+import Comment from "./comment";
 
 interface IUser {
   id: string;
@@ -59,11 +60,18 @@ const PostCard: FC<any> = ({ post }: PostProps) => {
     avatar_url: post.author.avatar_url,
   };
 
+  const commentsInfo = {
+    comments: post.comments,
+  };
+
+  //console.log(commentsInfo);
+
   return (
     <CardContainer>
-      <PostHeader postInfo={postInfo} authorInfo={authorInfo}/>
+      <PostHeader postInfo={postInfo} authorInfo={authorInfo} />
       <Video youtube_url={youtube_url} />
       <Info postInfo={postInfo} authorInfo={authorInfo} />
+      <Comment commentsInfo={commentsInfo} />
     </CardContainer>
   );
 };
