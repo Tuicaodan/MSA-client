@@ -24,13 +24,15 @@ interface IPost {
 type PostsContextState = {
   posts: IPost[];
   updatePostsState: (posts: IPost[]) => void;
-  updatePostState:(post: IPost) => void;
+  updatePostState: (post: IPost) => void;
+  findAndUpdatePostState: (post: IPost) => void;
 };
 
 const contextDefaultValues: PostsContextState = {
   posts: [],
   updatePostsState: (posts: IPost[]) => {},
-  updatePostState:(post: IPost) => {},
+  updatePostState: (post: IPost) => {},
+  findAndUpdatePostState: (post: IPost) => {},
 };
 
 const PostsContext = createContext<PostsContextState>(contextDefaultValues);
@@ -46,12 +48,33 @@ const PostsContextProvider: FC = ({ children }) => {
   };
 
   const updatePostState = (apiReturnPost: IPost) => {
-    const updatedPosts = [apiReturnPost,...posts];
+    const updatedPosts = [apiReturnPost, ...posts];
+    setPosts(updatedPosts);
+  };
+
+  const findAndUpdatePostState = (apiReturnPost: IPost) => {
+    console.log("post id from PostsContext");
+    const updatedPosts = posts.map((post) => {
+      console.log(post.postId);
+      console.log(apiReturnPost.postId);
+      if (post.postId === apiReturnPost.postId) {
+        return apiReturnPost;
+      } else {
+        return post;
+      }
+    });
     setPosts(updatedPosts);
   };
 
   return (
-    <PostsContext.Provider value={{ posts, updatePostsState, updatePostState }}>
+    <PostsContext.Provider
+      value={{
+        posts,
+        updatePostsState,
+        updatePostState,
+        findAndUpdatePostState,
+      }}
+    >
       {children}
     </PostsContext.Provider>
   );

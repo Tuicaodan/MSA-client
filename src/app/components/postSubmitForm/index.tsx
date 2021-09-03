@@ -72,6 +72,19 @@ const SubmissionForm = styled.form`
       rounded-md
     `}
   }
+  button:disabled {
+    ${tw`
+    bg-gray-300
+    hover:border-gray-300
+      hover:border-2
+      hover:bg-gray-300
+    border-2
+    cursor-default
+      w-24
+      mx-2
+      rounded-md
+    `}
+  }
 `;
 
 const SubmitForm = () => {
@@ -198,7 +211,9 @@ const SubmitForm = () => {
         )}
         {isPosting && (
           <span>
-            <button onClick={handleSubmit}>Post</button>
+            <button disabled={!isReadyToPost} onClick={handleSubmit}>
+              Post
+            </button>
             <button
               onClick={() => {
                 setIsPostingHandler(false);
