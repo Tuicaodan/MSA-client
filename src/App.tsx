@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Redirect, Route, Switch } from "react-router";
 import styled from "styled-components";
@@ -8,6 +8,8 @@ import AuthContext from "./context/AuthContext";
 import NavBar from "./app/components/navbar";
 import AuthContextProvider from "./context/AuthContext";
 import PostsContextProvider from "./context/PostsContext";
+import Sidebar from "./app/containers/Sidebar";
+
 
 const AppContainer = styled.div`
   ${tw`
@@ -37,6 +39,8 @@ const UserContentContainer = styled.div`
 `;
 
 const App = () => {
+
+
   return (
     <AuthContextProvider>
       <NavBar />
@@ -51,7 +55,9 @@ const App = () => {
             </Switch>
           </PostsContextProvider>
         </MainContentContaner>
-        <UserContentContainer>user info here</UserContentContainer>
+        <UserContentContainer>
+          <Sidebar />
+        </UserContentContainer>
       </AppContainer>
     </AuthContextProvider>
   );

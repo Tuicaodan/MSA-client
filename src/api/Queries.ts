@@ -26,3 +26,14 @@ export const POSTS = gql`
     }
   }
 `;
+
+
+export const LOGINED_USER = gql`
+query LoginedUser{
+  loginedUser{
+    id
+    avatar_url
+    username
+  }
+}
+`

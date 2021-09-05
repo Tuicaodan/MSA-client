@@ -7,10 +7,11 @@ import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../responsive";
 import menuStyles from "./menuStyles";
 import { useAuthContext } from "../../../context/AuthContext";
-import NavUserProfile from "./navUserProfile";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../../api/Mutations";
 import { useHistory, useLocation } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router";
+import HomePage from "../../containers/HomePage";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -29,7 +30,6 @@ const List = styled.ul`
   ${tw`
     flex
     list-none
-
 `}
 `;
 
@@ -92,7 +92,7 @@ const NavItems = () => {
 
   //const [data, setData] = useState({ errorMessage: "", isLoading: false });
   const { authUser, login, isLogin, logout } = useAuthContext();
-  console.log(authUser);
+  //console.log(authUser);
 
   const token = localStorage.getItem("token");
 
@@ -148,7 +148,7 @@ const NavItems = () => {
   useEffect(() => {
     const loginMethod = async () => {
       const code = query.get("code");
-      console.log(code);
+      //console.log(code);
       if (code != null) {
         try {
           const { data } = await userLogin({
@@ -165,7 +165,7 @@ const NavItems = () => {
               avatar_url: loginedUser.avatar_url,
             };
             login(AuthUser);
-            console.log(loginedUser.jwt_token);
+            //console.log(loginedUser.jwt_token);
             localStorage.setItem("token", loginedUser.jwt_token);
           }
         } catch (e) {
@@ -217,12 +217,8 @@ const NavItems = () => {
     <ListContainer>
       <List>
         <NavItem>
-          <NavUserProfile
-            username={authUser.username}
-            avatar_url={authUser.avatar_url}
-          />
+        <Route path="/home" render={() => <HomePage />} >Home</Route>
         </NavItem>
-
         {!isLogin && (
           <NavItem>
             <a
