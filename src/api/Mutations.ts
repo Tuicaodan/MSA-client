@@ -6,6 +6,21 @@ export const LOGIN = gql`
   }
 `;
 
+export const ADD_COMMENT = gql`
+  mutation AddComment($postId: String!, $comment: String!) {
+    addComment(postID: $postId, comment: $comment) {
+      id
+      comment
+      createdAt
+      user {
+        id
+        username
+        avatar_url
+      }
+    }
+  }
+`;
+
 export const ADD_POST = gql`
   mutation AddPost(
     $title: String!
@@ -27,14 +42,14 @@ export const ADD_POST = gql`
         username
         avatar_url
       }
-      comments{
+      comments {
         id
         comment
         createdAt
-        user{
+        user {
           id
-        username
-        avatar_url
+          username
+          avatar_url
         }
       }
     }

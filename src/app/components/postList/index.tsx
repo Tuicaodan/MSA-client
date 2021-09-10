@@ -74,7 +74,7 @@ const PostList = () => {
 
   return (
     <ListContainer>
-      {fakePost.map((eachPost) => {
+      {posts.map((eachPost) => {
         //console.log(eachPost);
         return <PostCard post={eachPost} />
       })}

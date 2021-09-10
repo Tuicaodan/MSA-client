@@ -9,6 +9,7 @@ interface IUser {
 interface IComment {
   commentId: string | null;
   comment: string | null;
+  createdAt: string | null;
   user: IUser | null;
 }
 
@@ -17,6 +18,7 @@ interface IPost {
   title: string | null;
   youtube_url: string | null;
   description: string | null;
+  createdAt: string | null;
   author: IUser | null;
   comments: IComment[] | null;
 }
@@ -26,6 +28,7 @@ type PostsContextState = {
   updatePostsState: (posts: IPost[]) => void;
   updatePostState: (post: IPost) => void;
   findAndUpdatePostState: (post: IPost) => void;
+  findAndUpdatePostCommentState: (comment: IComment, postId: string) => void;
 };
 
 const contextDefaultValues: PostsContextState = {
@@ -33,6 +36,7 @@ const contextDefaultValues: PostsContextState = {
   updatePostsState: (posts: IPost[]) => {},
   updatePostState: (post: IPost) => {},
   findAndUpdatePostState: (post: IPost) => {},
+  findAndUpdatePostCommentState: (comment: IComment, postId: string) => {},
 };
 
 const PostsContext = createContext<PostsContextState>(contextDefaultValues);
@@ -66,6 +70,25 @@ const PostsContextProvider: FC = ({ children }) => {
     setPosts(updatedPosts);
   };
 
+  const findAndUpdatePostCommentState = (
+    apiReturnComment: IComment,
+    postId: string
+  ) => {
+    const updatedPosts = posts.map((post) => {
+      if (post.postId == postId) {
+        if (post.comments == null) {
+          post.comments = [apiReturnComment];
+        } else if (post.comments != null) {
+          post.comments = [apiReturnComment, ...post.comments];
+        }
+        return post;
+      } else {
+        return post;
+      }
+    });
+    setPosts(updatedPosts);
+  };
+
   return (
     <PostsContext.Provider
       value={{
@@ -73,6 +96,7 @@ const PostsContextProvider: FC = ({ children }) => {
         updatePostsState,
         updatePostState,
         findAndUpdatePostState,
+        findAndUpdatePostCommentState,
       }}
     >
       {children}

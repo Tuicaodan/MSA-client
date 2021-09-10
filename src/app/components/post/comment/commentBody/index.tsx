@@ -15,7 +15,7 @@ interface IComment {
 }
 
 interface CommentProps {
-  comment: IComment;
+  comment: IComment | undefined;
 }
 
 const SingleCommentContainer = styled.div`
@@ -55,10 +55,12 @@ const PublishDate = styled.div`
 `}
 `;
 
-const CommentDisplay = (commentProps: CommentProps) => {
-  const commentContent = commentProps.comment.comment;
-  const commentDate = commentProps.comment.createdAt;
-  const userAvaterUrl = commentProps.comment.user.avatar_url;
+const CommentDisplay: FC<any> = ({ comment, createDate, userAvatar }) => {
+  //console.log(commentProps)
+
+  const commentContent = comment;
+  const commentDate = createDate == undefined ? "" : createDate.createdAt;
+  const userAvaterUrl = userAvatar == undefined ? "" : userAvatar;
 
   return (
     <SingleCommentContainer>

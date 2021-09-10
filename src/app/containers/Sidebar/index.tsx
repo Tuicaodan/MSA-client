@@ -23,14 +23,14 @@ const SidebarContainer = styled.div`
 const Sidebar = () => {
 
     const { data, error, loading } = useQuery(LOGINED_USER);
-    // console.log("in the app fc")
+    console.log("in the sidebar fc")
     // console.log(data)
     const { authUser, login, isLogin } = useAuthContext();
   
     useEffect(() => {
       const getLoginedUser = async () => {
         if (!loading && !error) {
-          //console.log("in the app useEffect")
+          console.log("in the sidebar useEffect")
           const AuthUser = {
             userId: data.loginedUser.id,
             username: data.loginedUser.username,

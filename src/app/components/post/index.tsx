@@ -60,9 +60,10 @@ const PostCard: FC<any> = ({ post }: PostProps) => {
     avatar_url: post.author.avatar_url,
   };
 
-  const commentsInfo = {
-    comments: post.comments,
-  };
+  // const commentsInfo = {
+  //   comments: post.comments,
+  //   postId: post.id,
+  // };
 
   //console.log(commentsInfo);
 
@@ -71,7 +72,7 @@ const PostCard: FC<any> = ({ post }: PostProps) => {
       <PostHeader postInfo={postInfo} authorInfo={authorInfo} />
       <Video youtube_url={youtube_url} />
       <Info postInfo={postInfo} authorInfo={authorInfo} />
-      <Comment commentsInfo={commentsInfo} />
+      <Comment comments={post.comments} postId={post.id}/>
     </CardContainer>
   );
 };
