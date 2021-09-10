@@ -8,7 +8,7 @@ export const LOGIN = gql`
 
 export const ADD_COMMENT = gql`
   mutation AddComment($postId: String!, $comment: String!) {
-    addComment(postID: $postId, comment: $comment) {
+    addComment(postId: $postId, comment: $comment) {
       id
       comment
       createdAt

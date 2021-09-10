@@ -39,7 +39,7 @@ const contextDefaultValues: PostsContextState = {
   findAndUpdatePostCommentState: (comment: IComment, postId: string) => {},
 };
 
-const PostsContext = createContext<PostsContextState>(contextDefaultValues);
+export const PostsContext = createContext<PostsContextState>(contextDefaultValues);
 
 export const usePostsContext = () => useContext(PostsContext);
 
