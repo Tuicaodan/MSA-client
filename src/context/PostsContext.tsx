@@ -47,7 +47,7 @@ const PostsContextProvider: FC = ({ children }) => {
   const [posts, setPosts] = useState(contextDefaultValues.posts);
 
   const updatePostsState = (apiReturnPosts: IPost[]) => {
-    const updatedPosts = [...apiReturnPosts, ...posts];
+    const updatedPosts = [...apiReturnPosts];
     setPosts(updatedPosts);
   };
 
@@ -74,6 +74,8 @@ const PostsContextProvider: FC = ({ children }) => {
     apiReturnComment: IComment,
     postId: string
   ) => {
+    console.log("before findAndUpdatePostCommentState")
+    console.log(posts)
     const updatedPosts = posts.map((post) => {
       if (post.postId == postId) {
         if (post.comments == null) {
@@ -87,6 +89,8 @@ const PostsContextProvider: FC = ({ children }) => {
       }
     });
     setPosts(updatedPosts);
+    console.log("After findAndUpdatePostCommentState")
+    console.log(posts)
   };
 
   return (

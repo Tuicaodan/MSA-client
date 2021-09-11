@@ -137,6 +137,9 @@ const SubmitForm = () => {
         //console.log("This is the return data after add post: ")
         //console.log(returnedData);
         const returnedPost = returnedData.data.addPost;
+        //console.log(returnedPost)
+        returnedPost.author = returnedPost.author[0]
+        //console.log(returnedPost)
         updatePostState(returnedPost);
         //console.log(returnedPost)
       } catch (err) {
@@ -211,7 +214,7 @@ const SubmitForm = () => {
         )}
         {isPosting && (
           <span>
-            <button disabled={!isReadyToPost} onClick={handleSubmit}>
+            <button onClick={handleSubmit}>
               Post
             </button>
             <button

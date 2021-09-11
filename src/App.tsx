@@ -10,7 +10,6 @@ import AuthContextProvider from "./context/AuthContext";
 import PostsContextProvider from "./context/PostsContext";
 import Sidebar from "./app/containers/Sidebar";
 
-
 const AppContainer = styled.div`
   ${tw`
     w-full
@@ -39,26 +38,24 @@ const UserContentContainer = styled.div`
 `;
 
 const App = () => {
-
-
   return (
     <AuthContextProvider>
-      <NavBar />
-      <AppContainer>
-        <MainContentContaner>
-          <PostsContextProvider>
+      <PostsContextProvider>
+        <NavBar />
+        <AppContainer>
+          <MainContentContaner>
             <Switch>
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
               <Route path="/home" render={() => <HomePage />} />
             </Switch>
-          </PostsContextProvider>
-        </MainContentContaner>
-        <UserContentContainer>
-          <Sidebar />
-        </UserContentContainer>
-      </AppContainer>
+          </MainContentContaner>
+          <UserContentContainer>
+            <Sidebar />
+          </UserContentContainer>
+        </AppContainer>
+      </PostsContextProvider>
     </AuthContextProvider>
   );
 };
