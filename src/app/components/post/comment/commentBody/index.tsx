@@ -23,9 +23,17 @@ const SingleCommentContainer = styled.div`
     w-full
     flex
     flex-row
-    justify-start
+    justify-between
     py-1
   `}
+`;
+
+const AvatarAndCommentContainer = styled.div`
+  ${tw`
+    flex
+    flex-row
+    justify-start
+`}
 `;
 
 const Image = styled.div`
@@ -41,6 +49,7 @@ const Image = styled.div`
 
 const CommentContent = styled.div`
   ${tw`
+  ml-2
   my-auto
   text-sm
 `}
@@ -50,6 +59,7 @@ const PublishDate = styled.div`
   ${tw`
   my-auto
   ml-3
+  mr-1
   text-gray-500
   text-xs
 `}
@@ -59,16 +69,19 @@ const CommentDisplay: FC<any> = ({ comment, createDate, userAvatar }) => {
   //console.log(commentProps)
 
   const commentContent = comment;
-  const commentDate = createDate == undefined ? "" : createDate.createdAt;
+  const commentDate = createDate == undefined ? "" : createDate;
+  const date = new Date(parseInt(commentDate)).toLocaleDateString();
   const userAvaterUrl = userAvatar == undefined ? "" : userAvatar;
 
   return (
     <SingleCommentContainer>
+      <AvatarAndCommentContainer>
       <Image>
         <img src={userAvaterUrl} />
       </Image>
       <CommentContent>{commentContent}</CommentContent>
-      <PublishDate>{commentDate}</PublishDate>
+      </AvatarAndCommentContainer>
+      <PublishDate>{date}</PublishDate>
     </SingleCommentContainer>
   );
 };

@@ -71,25 +71,25 @@ const PostsContainer = () => {
     },
   ];
 
-  const sortedPosts = [...fakePosts];
-
-  const compare = (a: any, b: any) => {
+  let sortedPosts = fakePosts.map((a) => {
+    return { ...a };
+  });
+  sortedPosts.sort((a: any, b: any) => {
     if ((a.comments == null, b.comments != null)) {
       return 1;
     } else if ((a.comments != null, b.comments == null)) {
       return -1;
     } else if ((a.comments == null, b.comments == null)) {
       return 0;
+    } else if (a.comments.length > b.comments.length) {
+      console.log(a.comments.length)
+      console.log(b.comments.length)
+      return -1;
     } else if (a.comments.length < b.comments.length) {
       return 1;
-    } else if (a.comments.length > b.comments.length) {
-      return -1;
-    } else {
-      return 0;
     }
-  };
-
-  sortedPosts.sort(compare);
+    return 0;
+  });
 
   return (
     <PopularPostsContainer>

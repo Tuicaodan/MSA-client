@@ -14,7 +14,7 @@ interface IComment {
 }
 
 interface IPost {
-  postId: string | null;
+  id: string | null;
   title: string | null;
   youtube_url: string | null;
   description: string | null;
@@ -59,9 +59,9 @@ const PostsContextProvider: FC = ({ children }) => {
   const findAndUpdatePostState = (apiReturnPost: IPost) => {
     console.log("post id from PostsContext");
     const updatedPosts = posts.map((post) => {
-      console.log(post.postId);
-      console.log(apiReturnPost.postId);
-      if (post.postId === apiReturnPost.postId) {
+      console.log(post.id);
+      console.log(apiReturnPost.id);
+      if (post.id === apiReturnPost.id) {
         return apiReturnPost;
       } else {
         return post;
@@ -73,11 +73,9 @@ const PostsContextProvider: FC = ({ children }) => {
   const findAndUpdatePostCommentState = (
     apiReturnComment: IComment,
     postId: string
-  ) => {
-    console.log("before findAndUpdatePostCommentState")
-    console.log(posts)
+  ) => {    
     const updatedPosts = posts.map((post) => {
-      if (post.postId == postId) {
+      if (post.id == postId) {
         if (post.comments == null) {
           post.comments = [apiReturnComment];
         } else if (post.comments != null) {
@@ -89,8 +87,7 @@ const PostsContextProvider: FC = ({ children }) => {
       }
     });
     setPosts(updatedPosts);
-    console.log("After findAndUpdatePostCommentState")
-    console.log(posts)
+
   };
 
   return (

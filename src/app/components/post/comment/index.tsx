@@ -21,7 +21,6 @@ interface CommentProps {
   postId: string;
 }
 
-
 const CommentContainer = styled.div`
   ${tw`
     w-full
@@ -48,13 +47,26 @@ const CommentContainer = styled.div`
 
 const Comment: FC<any> = ({ comments, postId }: CommentProps) => {
 
-  const commentsNum = comments == null ? 0 : comments.length;
+  let clonedComments = null;
+
+  //clone comments and then sort by date(reverse)
+  if (comments != null) {
+    clonedComments = comments.map(a => {return {...a}})
+    clonedComments.sort((object1: IComment, object2: IComment) => {
+      const date1 = parseInt(object1.createdAt);
+      const date2 = parseInt(object2.createdAt);
+      if (date1 > date2) return -1;
+      if (date1 < date2) return 1;
+      return 0;
+    });
+  }
+
 
   return (
     <CommentContainer>
-      {commentsNum == 0 && <div>No comments</div>}
-      {commentsNum != 0 &&
-        comments.map((eachComment, i) => {
+      {clonedComments == null && <div>No comments</div>}
+      {clonedComments != null &&
+        clonedComments.map((eachComment, i) => {
           if (i <= 1) {
             return (
               <CommentDisplay
@@ -65,7 +77,6 @@ const Comment: FC<any> = ({ comments, postId }: CommentProps) => {
             );
           }
         })}
-
 
       <SubmitCommentForm postId={postId} />
     </CommentContainer>
