@@ -8,7 +8,10 @@ const ProfileContainer = styled.div`
     flex-col
     items-center
     justify-between
-    w-full`}
+    w-full
+    border-b-2
+    mb-4
+    `}
 `;
 
 const Image = styled.div`

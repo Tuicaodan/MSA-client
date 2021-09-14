@@ -11,8 +11,19 @@ const PopularPostsContainer = styled.div`
     h-full
     items-start
     overflow-x-hidden
+    px-4
 `}
 `;
+
+const ContainerTitle = styled.div`
+${tw`
+  mx-auto
+  align-middle
+  text-center
+  font-extrabold
+  p-1
+`}
+`
 
 const PostsContainer = () => {
   const fakePosts = [
@@ -38,6 +49,9 @@ const PostsContainer = () => {
         {
           comment: "6",
         },
+        {
+          comment: "6",
+        },
       ],
     },
     {
@@ -59,6 +73,42 @@ const PostsContainer = () => {
         {
           comment: "3",
         },
+        {
+          comment: "1",
+        },
+        {
+          comment: "5",
+        },
+        {
+          comment: "6",
+        },
+        {
+          comment: "6",
+        },
+        {
+          comment: "1",
+        },
+        {
+          comment: "5",
+        },
+        {
+          comment: "6",
+        },
+        {
+          comment: "6",
+        },
+        {
+          comment: "1",
+        },
+        {
+          comment: "5",
+        },
+        {
+          comment: "6",
+        },
+        {
+          comment: "6",
+        },
       ],
     },
     {
@@ -71,19 +121,16 @@ const PostsContainer = () => {
     },
   ];
 
-  let sortedPosts = fakePosts.map((a) => {
-    return { ...a };
+  let hasCommentsPosts = fakePosts.filter((post) => {
+    if (post.comments != null) {
+      return post;
+    }
   });
-  sortedPosts.sort((a: any, b: any) => {
-    if ((a.comments == null, b.comments != null)) {
-      return 1;
-    } else if ((a.comments != null, b.comments == null)) {
-      return -1;
-    } else if ((a.comments == null, b.comments == null)) {
-      return 0;
-    } else if (a.comments.length > b.comments.length) {
-      console.log(a.comments.length)
-      console.log(b.comments.length)
+
+  console.log(hasCommentsPosts);
+
+  hasCommentsPosts.sort((a: any, b: any) => {
+    if (a.comments.length > b.comments.length) {
       return -1;
     } else if (a.comments.length < b.comments.length) {
       return 1;
@@ -93,7 +140,10 @@ const PostsContainer = () => {
 
   return (
     <PopularPostsContainer>
-      {sortedPosts.map((eachPost) => {
+      <ContainerTitle>
+        The popular posts:
+      </ContainerTitle>
+      {hasCommentsPosts.map((eachPost) => {
         return (
           <PopularPost
             title={eachPost.title}
