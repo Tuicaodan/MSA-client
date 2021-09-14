@@ -2,24 +2,54 @@ import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import SubmitForm from "../../components/postSubmitForm";
-import CardList from "../../components/postList"
+import CardList from "../../components/postList";
+import { useAuthContext } from "../../../context/AuthContext";
+import Sidebar from "../Sidebar";
 
 const PageContainer = styled.div`
   ${tw`
-        flex
-        flex-col
         w-full
-        h-full
-        items-center
-        overflow-x-hidden
+    h-full
+    flex
+    flex-row
+    px-10
     `}
 `;
 
+const MainContentContaner = styled.div`
+  ${tw`
+  w-full
+  md:w-3/4
+  flex
+  flex-col
+  items-center
+        overflow-x-hidden
+`}
+`;
+
+const UserContentContainer = styled.div`
+  ${tw`
+  hidden
+  md:flex
+  md:w-1/4
+  md:flex-col
+`}
+`;
+
 function HomePage() {
-  return <PageContainer>
-    <SubmitForm />
-    <CardList />
-  </PageContainer>;
-};
+  const { isLogin } = useAuthContext();
+
+  return (
+    <PageContainer>
+      <MainContentContaner>
+        {isLogin && <SubmitForm />}
+        <CardList />
+      </MainContentContaner>
+      <UserContentContainer>
+        <Sidebar />
+      </UserContentContainer>
+    </PageContainer>
+  );
+}
 
 export default HomePage;

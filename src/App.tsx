@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Redirect, Route, Switch } from "react-router";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import HomePage from "./app/containers/HomePage";
@@ -9,6 +14,7 @@ import NavBar from "./app/components/navbar";
 import AuthContextProvider from "./context/AuthContext";
 import PostsContextProvider from "./context/PostsContext";
 import Sidebar from "./app/containers/Sidebar";
+import SinglePostPage from "./app/containers/SinglePostPage";
 
 const AppContainer = styled.div`
   ${tw`
@@ -20,44 +26,24 @@ const AppContainer = styled.div`
   `}
 `;
 
-const MainContentContaner = styled.div`
-  ${tw`
-  w-full
-  md:w-3/4
-  flex
-  flex-col
-`}
-`;
-
-const UserContentContainer = styled.div`
-  ${tw`
-  hidden
-  md:flex
-  md:w-1/4
-  md:flex-col
-`}
-`;
-
 const App = () => {
   return (
-    <AuthContextProvider>
-      <PostsContextProvider>
-        <NavBar />
-        <AppContainer>
-          <MainContentContaner>
+    <Router>
+      <AuthContextProvider>
+        <PostsContextProvider>
+          <NavBar />
+          <AppContainer>
             <Switch>
+              <Route path="/home" exact render={() => <HomePage />} />
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
-              <Route path="/home" render={() => <HomePage />} />
+              <Route path="/post/:id" exact render={(props) => <SinglePostPage {...props}/>} />
             </Switch>
-          </MainContentContaner>
-          <UserContentContainer>
-            <Sidebar />
-          </UserContentContainer>
-        </AppContainer>
-      </PostsContextProvider>
-    </AuthContextProvider>
+          </AppContainer>
+        </PostsContextProvider>
+      </AuthContextProvider>
+    </Router>
   );
 };
 

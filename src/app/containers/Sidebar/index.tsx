@@ -17,7 +17,7 @@ const SidebarContainer = styled.div`
     items-center
     overflow-x-hidden
     shadow-lg
-    mt-12
+    mt-10
 `}
 `;
 

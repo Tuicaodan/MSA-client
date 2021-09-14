@@ -9,7 +9,7 @@ import menuStyles from "./menuStyles";
 import { useAuthContext } from "../../../context/AuthContext";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../../api/Mutations";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, Link } from "react-router-dom";
 import { Redirect, Route, Switch } from "react-router";
 import HomePage from "../../containers/HomePage";
 
@@ -217,7 +217,7 @@ const NavItems = () => {
     <ListContainer>
       <List>
         <NavItem>
-        <Route path="/home" render={() => <HomePage />} >Home</Route>
+        <Link to="/home">Home</Link>
         </NavItem>
         {!isLogin && (
           <NavItem>

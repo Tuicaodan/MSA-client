@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import {Link} from 'react-router-dom'
 
 interface IPostInfo {
   id: string;
@@ -59,16 +60,20 @@ const UserHeader = styled.div`
 const PostPageButton = styled.div`
   ${tw`
     my-auto
+    cursor-pointer
 `}
-svg{
-  ${tw`
-    text-gray-400    
+  svg {
+    ${tw`
+    text-gray-500    
     my-auto
+    mx-2
   `}
-}
+  }
 `;
 
-const PostHeader: FC<InfoProps> = ({ authorInfo }: InfoProps) => {
+const PostHeader: FC<InfoProps> = ({ postInfo, authorInfo }: InfoProps) => {
+  const postId = postInfo.id;
+
   return (
     <HeaderContainer>
       <UserHeader>
@@ -77,27 +82,29 @@ const PostHeader: FC<InfoProps> = ({ authorInfo }: InfoProps) => {
         </Image>
         <Username>{authorInfo.username}</Username>
       </UserHeader>
-
+      <Link to={`/post/${postId}`}>
       <PostPageButton>
         <svg
-          width="24"
           height="24"
           viewBox="0 0 24 24"
-          fill="none"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path
-            d="M10 10.0367L8.00002 10.0367L8 16.0367L14 16.0367L14 14.0367L11.4143 14.0366L16.7438 8.7071L15.3296 7.29289L10 12.6224L10 10.0367Z"
-            fill="currentColor"
-          />
-          <path
+          <g
+            fill="none"
             fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12ZM21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-            fill="currentColor"
-          />
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            transform="translate(3 3)"
+          >
+            <path d="m6.5 10.5 3-3-3-3" />
+            <path d="m5 3v9" transform="matrix(0 1 -1 0 12.5 2.5)" />
+            <path d="m1.5 5.5v-3.0079176c0-1.10147263.89060277-1.99561512 1.99206673-1.99998427l7.95228497-.03160773c1.1045608-.00432011 2.0035361.8875515 2.0079175 1.99211231l.0398162 10.02918369c.0043323 1.1045608-.8875404 2.003535-1.9921012 2.0079309-.0026436 0-.0052873 0-.0079309 0h-7.9920533c-1.1045695 0-2-.8954305-2-2v-2.9897173" />
+          </g>
         </svg>
       </PostPageButton>
+      </Link>
     </HeaderContainer>
   );
 };

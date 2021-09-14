@@ -6,7 +6,6 @@ import { usePostsContext } from "../../../context/PostsContext";
 import { PostsContext } from "../../../context/PostsContext";
 import { POSTS } from "../../../api/Queries";
 import PostCard from "../post";
-import { any } from "prop-types";
 
 const ListContainer = styled.div`
   ${tw`

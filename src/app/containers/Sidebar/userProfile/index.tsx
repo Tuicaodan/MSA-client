@@ -11,6 +11,7 @@ const ProfileContainer = styled.div`
     w-full
     border-b-2
     mb-4
+    mt-6
     `}
 `;
 
