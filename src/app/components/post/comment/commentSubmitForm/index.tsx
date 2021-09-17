@@ -37,6 +37,7 @@ const SubmissionForm = styled.form`
       focus:bg-gray-50
       px-3
       text-sm
+      overflow-scroll
     `}
   }
 `;

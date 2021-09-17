@@ -38,7 +38,9 @@ const App = () => {
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
-              <Route path="/post/:id" exact render={(props) => <SinglePostPage {...props}/>} />
+              <Route path="/post/:id" exact>
+                <SinglePostPage />
+              </Route>
             </Switch>
           </AppContainer>
         </PostsContextProvider>

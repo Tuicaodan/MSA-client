@@ -19,7 +19,7 @@ interface IPost {
   youtube_url: string | null;
   description: string | null;
   createdAt: string | null;
-  author: IUser | null;
+  author: IUser;
   comments: IComment[] | null;
 }
 

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Logo from "../logo";
 import NavItems from "./navItems";
+import { useQuery } from "@apollo/client";
+import { useAuthContext } from "../../../context/AuthContext";
+import { LOGINED_USER } from "../../../api/Queries";
 
 const NavbarContainer = styled.div`
   min-height: 68px;
@@ -19,6 +22,27 @@ const NavbarContainer = styled.div`
 const LogoContainer = styled.div``;
 
 const NavBar = () => {
+  const { data, error, loading } = useQuery(LOGINED_USER);
+  console.log("in the sidebar fc");
+  // console.log(data)
+  const { authUser, login, isLogin } = useAuthContext();
+
+  useEffect(() => {
+    const getLoginedUser = async () => {
+      if (!loading && !error) {
+        console.log("in the sidebar useEffect");
+        const AuthUser = {
+          userId: data.loginedUser.id,
+          username: data.loginedUser.username,
+          avatar_url: data.loginedUser.avatar_url,
+        };
+        //console.log(AuthUser)
+        login(AuthUser);
+      }
+    };
+    getLoginedUser();
+  }, [data]);
+
   return (
     <NavbarContainer>
       <LogoContainer>

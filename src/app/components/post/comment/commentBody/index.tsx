@@ -22,45 +22,50 @@ const SingleCommentContainer = styled.div`
   ${tw`
     w-full
     flex
-    flex-row
-    justify-between
+    flex-col
     py-1
+    justify-start
   `}
 `;
 
 const AvatarAndCommentContainer = styled.div`
   ${tw`
     flex
-    flex-row
-    justify-start
+    flex-wrap
+    w-full
 `}
 `;
 
-const Image = styled.div`
-  ${tw`
-  h-5
-  w-5
-  rounded-full
-  my-auto
-  mx-1
-  overflow-hidden
-`}
-`;
 
 const CommentContent = styled.div`
   ${tw`
+  w-full
   ml-2
   my-auto
   text-sm
+  border-b-2
 `}
+  p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  img {
+    ${tw`
+    rounded-full
+  h-5
+  w-5
+  inline
+  mx-1`}
+  }
 `;
 
-const PublishDate = styled.div`
+const PublishDate = styled.span`
   ${tw`
   my-auto
   ml-3
   mr-1
-  text-gray-500
+  text-gray-300
   text-xs
 `}
 `;
@@ -76,12 +81,14 @@ const CommentDisplay: FC<any> = ({ comment, createDate, userAvatar }) => {
   return (
     <SingleCommentContainer>
       <AvatarAndCommentContainer>
-      <Image>
-        <img src={userAvaterUrl} />
-      </Image>
-      <CommentContent>{commentContent}</CommentContent>
+        <CommentContent>
+          <p>
+            <img src={userAvaterUrl} />
+            {commentContent}
+            <PublishDate>{date}</PublishDate>
+          </p>
+        </CommentContent>
       </AvatarAndCommentContainer>
-      <PublishDate>{date}</PublishDate>
     </SingleCommentContainer>
   );
 };
