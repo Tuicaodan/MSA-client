@@ -67,18 +67,10 @@ const PostInfoContainer = styled.div`
 `}
 `;
 
-const UserInfoContainer = styled.div`
-  ${tw`
-   w-full
-   m-auto
-`}
-`;
-
 const UserPostsContainer = styled.div`
   ${tw`
    mt-24
    mx-auto
-
    w-11/12
 `}
   h2 {
@@ -95,12 +87,17 @@ const UserPostsContainer = styled.div`
 const SinglePostPage = () => {
   const { posts, updatePostsState } = usePostsContext();
 
+  //console.log(posts.length)
+
+  const needFetching = posts.length==0;
+
   const { id } = useParams<{ id: string }>();
 
-  const { data, error, loading } = useQuery(POSTS);
+  const { data, error, loading } = useQuery(POSTS,
+    { skip: !needFetching });
 
   useEffect(() => {
-    if (!loading && !error) {
+    if (!loading && !error && needFetching) {
       const dataPosts = data.posts.map((post: any) => ({
         ...post,
         author: post.author[0],
@@ -130,8 +127,6 @@ const SinglePostPage = () => {
   const postId = singlePost ? singlePost.id : "";
 
   const userPosts = posts.filter((post) => post.author.userId == authorInfo.id);
-
-  console.log(userPosts);
 
   return (
     <PageContainer>

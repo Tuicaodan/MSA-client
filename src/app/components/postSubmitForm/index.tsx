@@ -93,7 +93,7 @@ const SubmitForm = () => {
     setIsPosting(result);
   };
 
-  const { updatePostState } = usePostsContext();
+  const { posts, updatePostsState, setPosts } = usePostsContext();
   const [postTitle, setPostTitle] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [postDescription, setPostDescription] = useState("");
@@ -138,9 +138,15 @@ const SubmitForm = () => {
         //console.log(returnedData);
         const returnedPost = returnedData.data.addPost;
         //console.log(returnedPost)
-        returnedPost.author = returnedPost.author[0]
+        returnedPost.author = returnedPost.author[0];
         //console.log(returnedPost)
-        updatePostState(returnedPost);
+        // console.log("in the submit form fc, returnedPost:")
+        // console.log(returnedPost)
+
+        let updatedPosts = [returnedPost, ...posts];
+        setPosts(updatedPosts);
+
+        //updatePostState(returnedPost);
         //console.log(returnedPost)
       } catch (err) {
         console.log("This is the addPost error: " + err);
@@ -214,9 +220,7 @@ const SubmitForm = () => {
         )}
         {isPosting && (
           <span>
-            <button onClick={handleSubmit}>
-              Post
-            </button>
+            <button onClick={handleSubmit}>Post</button>
             <button
               onClick={() => {
                 setIsPostingHandler(false);

@@ -27,7 +27,7 @@ const Video: FC<VideoProps> = ({ youtube_url }) => {
   const embedId = getYouTubeID(youtube_url);
   const embedUrl = `https://www.youtube.com/embed/${embedId}`;
 
-  console.log(embedId)
+  //console.log(embedId)
 
   return (
     <VideoContainer>

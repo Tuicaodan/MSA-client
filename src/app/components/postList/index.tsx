@@ -23,7 +23,7 @@ const ComponentUsingUseContext = () => {
   return (
     <div>
       {posts.map((eachPost) => {
-        console.log("in the PostList consumer");
+        //console.log("in the PostList consumer");
         return <PostCard key={eachPost.id} post={eachPost} />;
       })}
     </div>
