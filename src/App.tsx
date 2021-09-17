@@ -15,6 +15,7 @@ import AuthContextProvider from "./context/AuthContext";
 import PostsContextProvider from "./context/PostsContext";
 import Sidebar from "./app/containers/Sidebar";
 import SinglePostPage from "./app/containers/SinglePostPage";
+import UserPage from "./app/containers/UserPage";
 
 const AppContainer = styled.div`
   ${tw`
@@ -40,6 +41,9 @@ const App = () => {
               </Route>
               <Route path="/post/:id" exact>
                 <SinglePostPage />
+              </Route>
+              <Route path="/user/:id" exact>
+                <UserPage />
               </Route>
             </Switch>
           </AppContainer>

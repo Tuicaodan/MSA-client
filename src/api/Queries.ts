@@ -54,12 +54,29 @@ export const POST = gql`
   }
 `;
 
-export const LOGINED_USER = gql`
-query LoginedUser{
-  loginedUser{
-    id
-    avatar_url
-    username
+export const USER = gql`
+  query User($id: String!) {
+    user(id: $id) {
+      id
+      avatar_url
+      username
+      post {
+        id
+        title
+        createdAt
+        description
+        youtube_url
+      }
+    }
   }
-}
-`
+`;
+
+export const LOGINED_USER = gql`
+  query LoginedUser {
+    loginedUser {
+      id
+      avatar_url
+      username
+    }
+  }
+`;

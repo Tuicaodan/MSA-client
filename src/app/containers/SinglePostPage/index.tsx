@@ -89,12 +89,11 @@ const SinglePostPage = () => {
 
   //console.log(posts.length)
 
-  const needFetching = posts.length==0;
+  const needFetching = posts.length == 0;
 
   const { id } = useParams<{ id: string }>();
 
-  const { data, error, loading } = useQuery(POSTS,
-    { skip: !needFetching });
+  const { data, error, loading } = useQuery(POSTS, { skip: !needFetching });
 
   useEffect(() => {
     if (!loading && !error && needFetching) {
@@ -117,7 +116,7 @@ const SinglePostPage = () => {
   };
 
   const authorInfo = {
-    id: singlePost ? singlePost.author.userId : "",
+    id: singlePost ? singlePost.author.id : "",
     username: singlePost ? singlePost.author.username : "",
     avatar_url: singlePost ? singlePost.author.avatar_url : "",
   };
@@ -126,7 +125,7 @@ const SinglePostPage = () => {
   const comments = singlePost ? singlePost.comments : [];
   const postId = singlePost ? singlePost.id : "";
 
-  const userPosts = posts.filter((post) => post.author.userId == authorInfo.id);
+  const userPosts = posts.filter((post) => post.author.id == authorInfo.id);
 
   return (
     <PageContainer>

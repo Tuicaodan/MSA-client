@@ -1,13 +1,13 @@
 import React, { useState, createContext, FC, useContext } from "react";
 
 interface IUser {
-  userId: string | null;
+  id: string | null;
   username: string | null;
   avatar_url: string | null;
 }
 
 interface IComment {
-  commentId: string | null;
+  id: string | null;
   comment: string | null;
   createdAt: string | null;
   user: IUser | null;
