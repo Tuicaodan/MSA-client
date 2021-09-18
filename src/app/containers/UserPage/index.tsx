@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { usePostsContext } from "../../../context/PostsContext";
 import { useQuery } from "@apollo/client";
 import { POSTS, USER, LOGINED_USER } from "../../../api/Queries";
+import UserPosts from "../SinglePostPage/UserPosts";
 
 const PageContainer = styled.div`
   ${tw`
@@ -16,32 +17,68 @@ const PageContainer = styled.div`
 
 const InfoContainer = styled.div`
   ${tw`
-
+    w-full
+    flex
+    flex-row
+    p-5
+    justify-center
+    border-b-4
+    mb-6
 `}
 `;
 
 const UserAvatar = styled.div`
   ${tw`
-
-`}
+    h-24
+    w-24
+    rounded-full
+    shadow-md
+    overflow-hidden
+    mx-10`}
 `;
 
 const UserInfo = styled.div`
   ${tw`
 
+  mx-10
 `}
+  h1 {
+    ${tw`
+      font-bold
+      text-2xl
+      mb-4
+  `}
+  }
+  span {
+    ${tw`
+    inline-block
+    mr-3
+  `}
+  }
 `;
 
 const PostsContainer = styled.div`
   ${tw`
-
+  mt-24
+   mx-auto
+   w-11/12
 `}
+  h2 {
+    ${tw`
+    text-center
+    text-lg
+    font-bold
+    border-b-4
+    mb-2
+  `}
+  }
 `;
 
 const UserPage = () => {
   const { posts, updatePostsState } = usePostsContext();
 
   const needFetching = posts.length == 0;
+  console.log(needFetching);
 
   const { id } = useParams<{ id: string }>();
 
@@ -66,12 +103,54 @@ const UserPage = () => {
         author: post.author[0],
       }));
       updatePostsState(dataPosts);
+      console.log("triggle here #1");
     }
   }, [data]);
 
+  console.log(posts);
+
   const userPosts = posts.filter((post) => post.author.id == id);
 
-  return <PageContainer>{id}</PageContainer>;
+  const userPostsNum = userPosts.length;
+  let userCommentsNum = 0;
+  posts.map((post) => {
+    if (post.comments != null) {
+      post.comments.map((comment) => {
+        if (comment.user?.id == id) {
+          userCommentsNum++;
+        }
+      });
+    }
+  });
+
+  const userInfo = {
+    avatar_url: !userPosts[0] ? "" : userPosts[0].author.avatar_url,
+    username: !userPosts[0] ? "" : userPosts[0].author.username,
+    commentsNum: !userPosts[0] ? 0 : userCommentsNum,
+    postsNum: !userPosts[0] ? 0 : userPostsNum,
+  };
+
+  console.log(userPostsNum);
+  console.log(userCommentsNum);
+
+  return (
+    <PageContainer>
+      <InfoContainer>
+        <UserAvatar>
+          <img src={userInfo.avatar_url} />
+        </UserAvatar>
+        <UserInfo>
+          <h1>{userInfo.username}</h1>
+          <span>{userInfo.postsNum} posts </span>
+          <span> {userInfo.commentsNum} comments</span>
+        </UserInfo>
+      </InfoContainer>
+      <PostsContainer>
+        <h2>Posts</h2>
+        {userPosts.length > 0 && <UserPosts userPosts={userPosts} />}
+      </PostsContainer>
+    </PageContainer>
+  );
 };
 
 export default UserPage;

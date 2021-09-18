@@ -1,9 +1,9 @@
 import React, { useState, createContext, FC, useContext } from "react";
 
 interface IUser {
-  id: string | null;
-  username: string | null;
-  avatar_url: string | null;
+  id: string;
+  username: string;
+  avatar_url: string;
 }
 
 interface IComment {
