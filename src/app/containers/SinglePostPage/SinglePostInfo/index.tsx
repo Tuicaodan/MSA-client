@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { FC } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -88,12 +89,15 @@ const SinglePostInfo = ({ postInfo, authorInfo }: any) => {
     <InfoContainer>
       <PostInfo>
         <h2>{postInfo.title}</h2>
+        <Link to={`/user/${authorInfo.id}`}>
         <AuthorInfo>
         <Image>
           <img src={authorInfo.avatar_url} />
         </Image>
         <Username>{authorInfo.username}</Username>
       </AuthorInfo>
+        </Link>
+        
         <h6>Posted on: {date}</h6>
         <p>{postInfo.description}</p>
       </PostInfo>

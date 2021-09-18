@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { FC } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -17,11 +18,13 @@ const ProfileContainer = styled.div`
 
 const Image = styled.div`
   ${tw`
-    h-20
-    w-20
+    h-24
+    w-24
     rounded-full
     m-auto
     mt-3
+    overflow-hidden
+    shadow-md
 `}
 `;
 const UsernameContainer = styled.div`
@@ -37,14 +40,21 @@ const UsernameContainer = styled.div`
 interface UserProfileProps {
   username: string | null | undefined;
   avatar_url: string | null | undefined;
+  userId: string | null | undefined;
 }
 
-const UserProfile: FC<UserProfileProps> = ({ username, avatar_url }) => {
+const UserProfile: FC<UserProfileProps> = ({
+  username,
+  avatar_url,
+  userId,
+}) => {
   avatar_url = avatar_url ? avatar_url : "";
   return (
     <ProfileContainer>
       <Image>
-        <img src={avatar_url} />
+        <Link to={`/user/${userId}`}>
+          <img src={avatar_url} />
+        </Link>
       </Image>
       <UsernameContainer>{username}</UsernameContainer>
     </ProfileContainer>

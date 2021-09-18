@@ -49,6 +49,7 @@ const Sidebar = () => {
         <UserProfile
           username={authUser.username}
           avatar_url={authUser.avatar_url}
+          userId={authUser.userId}
         />
       )}
       <PostsContainer />

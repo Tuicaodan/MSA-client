@@ -9,9 +9,11 @@ import UserPosts from "../SinglePostPage/UserPosts";
 
 const PageContainer = styled.div`
   ${tw`
-    w-full
+ w-full
     flex
-    flex-col
+  flex-col
+
+    m-auto
 `}
 `;
 
@@ -19,11 +21,13 @@ const InfoContainer = styled.div`
   ${tw`
     w-full
     flex
-    flex-row
-    p-5
-    justify-center
-    border-b-4
-    mb-6
+    md:flex-row
+    flex-col
+    py-5
+    md:p-5
+    align-middle
+    m-auto
+    md:justify-center
 `}
 `;
 
@@ -31,15 +35,16 @@ const UserAvatar = styled.div`
   ${tw`
     h-24
     w-24
+    m-auto
     rounded-full
     shadow-md
     overflow-hidden
-    mx-10`}
+    md:mx-10`}
 `;
 
 const UserInfo = styled.div`
   ${tw`
-
+  text-center
   mx-10
 `}
   h1 {
@@ -147,7 +152,7 @@ const UserPage = () => {
       </InfoContainer>
       <PostsContainer>
         <h2>Posts</h2>
-        {userPosts.length > 0 && <UserPosts userPosts={userPosts} />}
+        {userPosts.length > 0 && <UserPosts userPosts={userPosts} showAllPost={true} />}
       </PostsContainer>
     </PageContainer>
   );

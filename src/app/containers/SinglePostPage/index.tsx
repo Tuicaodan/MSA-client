@@ -144,7 +144,9 @@ const SinglePostPage = () => {
       </SinglePostConstainer>
       <UserPostsContainer>
         <h2>{authorInfo.username}'s Post you may also interested:</h2>
-        {userPosts.length > 0 && <UserPosts userPosts={userPosts} />}
+        {userPosts.length > 0 && (
+          <UserPosts userPosts={userPosts} showAllPost={false} />
+        )}
       </UserPostsContainer>
     </PageContainer>
   );

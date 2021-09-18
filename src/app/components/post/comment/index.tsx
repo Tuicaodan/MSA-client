@@ -76,6 +76,7 @@ const Comment: FC<any> = ({ comments, postId }: CommentProps) => {
                 comment={eachComment.comment}
                 createDate={eachComment.createdAt}
                 userAvatar={eachComment.user.avatar_url}
+                userId={eachComment.user.id}
               />
             );
           }

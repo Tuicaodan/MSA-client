@@ -54,7 +54,7 @@ const SinglePostContainer = styled.div`
   }
 `;
 
-const UserPosts = ({ userPosts }: any) => {
+const UserPosts = ({ userPosts, showAllPost }: any) => {
   const postThumbnails = userPosts.map((post: any) => {
     const videoId = getYouTubeID(post.youtube_url);
     return {
@@ -66,7 +66,7 @@ const UserPosts = ({ userPosts }: any) => {
   return (
     <UserPostsContainer>
       {postThumbnails.map((post: any, index: number) => {
-        if (index <= 6) {
+        if (showAllPost) {
           return (
             <Link to={`/post/${post.postId}`}>
               <SinglePostContainer>
@@ -74,6 +74,16 @@ const UserPosts = ({ userPosts }: any) => {
               </SinglePostContainer>
             </Link>
           );
+        } else {
+          if (index <= 6) {
+            return (
+              <Link to={`/post/${post.postId}`}>
+                <SinglePostContainer>
+                  <img src={post.thumbnail} />
+                </SinglePostContainer>
+              </Link>
+            );
+          }
         }
       })}
     </UserPostsContainer>

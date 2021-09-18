@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { FC } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -36,7 +37,6 @@ const AvatarAndCommentContainer = styled.div`
 `}
 `;
 
-
 const CommentContent = styled.div`
   ${tw`
   w-full
@@ -70,7 +70,12 @@ const PublishDate = styled.span`
 `}
 `;
 
-const CommentDisplay: FC<any> = ({ comment, createDate, userAvatar }) => {
+const CommentDisplay: FC<any> = ({
+  comment,
+  createDate,
+  userAvatar,
+  userId,
+}) => {
   //console.log(commentProps)
 
   const commentContent = comment;
@@ -83,7 +88,9 @@ const CommentDisplay: FC<any> = ({ comment, createDate, userAvatar }) => {
       <AvatarAndCommentContainer>
         <CommentContent>
           <p>
-            <img src={userAvaterUrl} />
+            <Link to={`/user/${userId}`}>
+              <img src={userAvaterUrl} />
+            </Link>
             {commentContent}
             <PublishDate>{date}</PublishDate>
           </p>
