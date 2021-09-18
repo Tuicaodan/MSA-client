@@ -3,6 +3,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import CommentDisplay from "../../../components/post/comment/commentBody";
 import SubmitCommentForm from "../../../components/post/comment/commentSubmitForm";
+import { useAuthContext } from "../../../../context/AuthContext";
 
 interface IUser {
   id: string;
@@ -62,6 +63,8 @@ const CommentSubmissionContainer = styled.div`
 `;
 
 const Comment: FC<any> = ({ comments, postId }: CommentProps) => {
+  const { isLogin } = useAuthContext();
+
   let clonedComments = null;
 
   //clone comments and then sort by date(reverse)
@@ -96,7 +99,7 @@ const Comment: FC<any> = ({ comments, postId }: CommentProps) => {
           })}
       </CommentBody>
       <CommentSubmissionContainer>
-        <SubmitCommentForm postId={postId} />
+        {isLogin && <SubmitCommentForm postId={postId} />}
       </CommentSubmissionContainer>
     </CommentContainer>
   );
