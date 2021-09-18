@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -35,12 +36,14 @@ const Image = styled.div`
 
 function Logo() {
   return (
-    <LogoContainer>
-      <Image>
-        <img src={WebLogoImg} alt="web logo"/>
-      </Image>
-      <LogoText>Youtagram</LogoText>
-    </LogoContainer>
+    <Link to={"/home"}>
+      <LogoContainer>
+        <Image>
+          <img src={WebLogoImg} alt="web logo" />
+        </Image>
+        <LogoText>Youtagram</LogoText>
+      </LogoContainer>
+    </Link>
   );
 }
 
