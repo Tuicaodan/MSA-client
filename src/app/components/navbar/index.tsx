@@ -6,6 +6,7 @@ import NavItems from "./navItems";
 import { useQuery } from "@apollo/client";
 import { useAuthContext } from "../../../context/AuthContext";
 import { LOGINED_USER } from "../../../api/Queries";
+import SearchBar from "./SearchBar";
 
 const NavbarContainer = styled.div`
   min-height: 68px;
@@ -47,6 +48,7 @@ const NavBar = () => {
       <LogoContainer>
         <Logo />
       </LogoContainer>
+      <SearchBar />
       <NavItems />
     </NavbarContainer>
   );
