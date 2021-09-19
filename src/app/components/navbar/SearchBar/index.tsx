@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { StringLiteralLike } from "typescript";
 import { usePostsContext } from "../../../../context/PostsContext";
+import { useSearchContext } from "../../../../context/SearchContext";
 
 const SearchBarContainer = styled.div`
   ${tw`
@@ -65,8 +66,8 @@ const ResultItem = styled.div`
         m-auto
     `}
   }
-  div{
-      ${tw`
+  div {
+    ${tw`
       w-full`}
   }
   div:hover {
@@ -86,8 +87,11 @@ interface FilterData {
 }
 
 const SearchBar = () => {
-  const [filteredData, setFilteredData] = useState<any>([]);
-  const [wordEntered, setWordEntered] = useState("");
+  //   const [filteredData, setFilteredData] = useState<any>([]);
+
+  const { wordEntered, setWordEntered, filteredData, setFilteredData } =
+    useSearchContext();
+
 
   const { posts } = usePostsContext();
 

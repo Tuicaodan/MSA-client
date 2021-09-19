@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import { useSearchContext } from "../../../context/SearchContext";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useHistory, useParams } from "react-router-dom";
@@ -72,6 +73,7 @@ const UserPostsContainer = styled.div`
    mt-24
    mx-auto
    w-11/12
+   justify-center
 `}
   h2 {
     ${tw`
@@ -86,6 +88,10 @@ const UserPostsContainer = styled.div`
 
 const SinglePostPage = () => {
   const { posts, updatePostsState } = usePostsContext();
+
+  const { setWordEntered, setFilteredData } = useSearchContext();
+
+  //setWordEntered("");
 
   //console.log(posts.length)
 
@@ -126,6 +132,11 @@ const SinglePostPage = () => {
   const postId = singlePost ? singlePost.id : "";
 
   const userPosts = posts.filter((post) => post.author.id == authorInfo.id);
+
+  useEffect(() => {
+    setWordEntered("");
+    setFilteredData([]);
+  }, [postId]);
 
   return (
     <PageContainer>

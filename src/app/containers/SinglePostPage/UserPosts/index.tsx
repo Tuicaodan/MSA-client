@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSearchContext } from "../../../../context/SearchContext";
 import styled from "styled-components";
 import tw from "twin.macro";
 const getYouTubeID = require("get-youtube-id");
@@ -36,6 +37,7 @@ const UserPostsContainer = styled.div`
     w-full
     flex
     flex-wrap
+    justify-center
 `}
 `;
 
@@ -55,6 +57,12 @@ const SinglePostContainer = styled.div`
 `;
 
 const UserPosts = ({ userPosts, showAllPost }: any) => {
+  const { setWordEntered, setFilteredData } = useSearchContext();
+  useEffect(() => {
+    setWordEntered("");
+    setFilteredData([]);
+  }, []);
+
   const postThumbnails = userPosts.map((post: any) => {
     const videoId = getYouTubeID(post.youtube_url);
     return {

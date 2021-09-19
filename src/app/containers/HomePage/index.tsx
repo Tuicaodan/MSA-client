@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import SubmitForm from "../../components/postSubmitForm";
 import CardList from "../../components/postList";
 import { useAuthContext } from "../../../context/AuthContext";
+import { useSearchContext } from "../../../context/SearchContext";
 import Sidebar from "../Sidebar";
 
 const PageContainer = styled.div`
@@ -38,6 +39,12 @@ const UserContentContainer = styled.div`
 
 function HomePage() {
   const { isLogin } = useAuthContext();
+
+  const { setWordEntered, setFilteredData } = useSearchContext();
+  useEffect(() => {
+    setWordEntered("");
+    setFilteredData([]);
+  }, []);
 
   return (
     <PageContainer>
