@@ -48,6 +48,13 @@ const CommentContainer = styled.div`
       
     `}
   }
+  div::-webkit-scrollbar {
+    display: none;
+  }
+  div {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 `;
 
 const CommentBody = styled.div`
@@ -84,7 +91,7 @@ const Comment: FC<any> = ({ comments, postId }: CommentProps) => {
   return (
     <CommentContainer>
       <CommentBody>
-        {clonedComments == null && <div>No comments</div>}
+        {clonedComments == null && <h6>No comments</h6>}
 
         {clonedComments != null &&
           clonedComments.map((eachComment) => {

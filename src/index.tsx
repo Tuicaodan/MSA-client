@@ -8,12 +8,15 @@ import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider } from "@apollo/client";
 import graphQLClient from "./GraphQLClient";
 import { BrowserRouter as Router } from "react-router-dom";
+import ThemeContextProvider from "./context/ThemeContext";
 
 ReactDOM.render(
   <Router>
     <ApolloProvider client={graphQLClient}>
       <React.StrictMode>
-        <App />
+        <ThemeContextProvider>
+          <App />
+        </ThemeContextProvider>
       </React.StrictMode>
     </ApolloProvider>
   </Router>,

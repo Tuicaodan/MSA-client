@@ -29,8 +29,10 @@ const SinglePostConstainer = styled.div`
     rounded-b-md
     justify-center
     m-auto
-   shadow-lg
+    shadow-lg
  `}
+  /* --box-shadow-color: #ffff;
+  box-shadow: 0px 2px 4px -1px var(--box-shadow-color); */
 `;
 const VideoAndCommentsContainer = styled.div`
   ${tw`

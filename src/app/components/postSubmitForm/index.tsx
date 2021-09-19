@@ -35,6 +35,10 @@ const SubmissionForm = styled.form`
       focus:bg-gray-50
     `}
   }
+  input:focus,
+  textarea:focus {
+    outline: none;
+  }
   div {
     ${tw`
       w-full

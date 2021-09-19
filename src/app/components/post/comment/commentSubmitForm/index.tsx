@@ -40,6 +40,9 @@ const SubmissionForm = styled.form`
       overflow-scroll
     `}
   }
+  input:focus {
+    outline: none;
+  }
 `;
 
 const SubmitCommentForm: FC<SubmitCommentProps> = (props) => {
