@@ -5,7 +5,7 @@ import { onError } from "@apollo/client/link/error";
 const abortController = new AbortController();
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: "https://youtagram-api.azurewebsites.net/graphql",
   fetchOptions: {
     mode: "cors",
     signal: abortController.signal,
