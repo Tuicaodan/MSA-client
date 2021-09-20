@@ -36,7 +36,7 @@ const CommentContainer = styled.div`
 `}
   h6 {
     ${tw`
-      text-gray-500
+      text-gray-400
       text-sm
       pl-6
     `}

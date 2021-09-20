@@ -11,6 +11,7 @@ const FormContainer = styled.div`
         md:w-3/4
         py-5
         px-0
+        text-gray-400
     `};
 `;
 
@@ -74,6 +75,7 @@ const SubmissionForm = styled.form`
       w-24
       mx-2
       rounded-md
+      text-gray-500
     `}
   }
   button:disabled {

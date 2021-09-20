@@ -64,7 +64,7 @@ const PostPageButton = styled.div`
 `}
   svg {
     ${tw`
-    text-gray-500    
+    text-gray-400    
     my-auto
     mx-2
   `}

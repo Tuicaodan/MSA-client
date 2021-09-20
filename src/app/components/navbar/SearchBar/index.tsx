@@ -9,12 +9,14 @@ import { useSearchContext } from "../../../../context/SearchContext";
 const SearchBarContainer = styled.div`
   ${tw`
     shadow-md
+    
 `}
 `;
 
 const SearchInputs = styled.div`
   ${tw`
     flex
+    
 `}
   input {
     ${tw`
@@ -22,7 +24,7 @@ const SearchInputs = styled.div`
     p-4
     h-6
     w-72
-
+    text-gray-500
     `}
   }
   input:focus {
@@ -34,23 +36,30 @@ const SearchIcon = styled.div`
   ${tw`
     w-6
     h-6
-    grid
+    flex
     justify-center
     align-middle
     my-auto
 `}
+  svg {
+    ${tw`
+    align-middle
+    m-auto
+  `}
+  }
 `;
 
 const SearchResults = styled.div`
   ${tw`
     mt-1
-    w-80
+    w-72
     h-64    
     align-middle
     overflow-hidden
     overflow-y-auto
     absolute
     bg-white
+    text-gray-500
 `}
 `;
 

@@ -9,11 +9,12 @@ import UserPosts from "../SinglePostPage/UserPosts";
 
 const PageContainer = styled.div`
   ${tw`
- w-full
+    w-full
     flex
   flex-col
+   h-full
+    mt-16
 
-    m-auto
 `}
 `;
 
@@ -28,6 +29,7 @@ const InfoContainer = styled.div`
     align-middle
     m-auto
     md:justify-center
+    mt-10
 `}
 `;
 
@@ -152,7 +154,9 @@ const UserPage = () => {
       </InfoContainer>
       <PostsContainer>
         <h2>Posts</h2>
-        {userPosts.length > 0 && <UserPosts userPosts={userPosts} showAllPost={true} />}
+        {userPosts.length > 0 && (
+          <UserPosts userPosts={userPosts} showAllPost={true} />
+        )}
       </PostsContainer>
     </PageContainer>
   );

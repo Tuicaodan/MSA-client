@@ -30,7 +30,9 @@ const AppContainer = styled.div<StyleProps>`
     h-full
     flex
     flex-row
+    justify-start
     px-10
+    mb-0
   `}
   background: ${(p) => p.backgroundColor};
   color: ${(p) => p.textColor};

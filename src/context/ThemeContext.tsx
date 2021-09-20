@@ -1,21 +1,18 @@
 import React, { useState, createContext, FC, useContext } from "react";
+import { Color } from "../models/color.modle";
 
 interface ThemeContextState {
-  currentTheme: string;
-  setCurrentTheme: (color: string) => void;
-  currentTextColor: string;
-  setCurrentTextColor: (color: string) => void;
+  currentTheme: Color;
+  currentTextColor: Color;
   changeToDrakTheme: () => void;
-  changeToLightTheme: ()=>void;
+  changeToLightTheme: () => void;
 }
 
 const contextDefaultValues: ThemeContextState = {
-  currentTheme: "white",
-  setCurrentTheme: (theme: string) => {},
-  currentTextColor: "rgba(75, 85, 99, 1)",
-  setCurrentTextColor: (color: string) => {},
+  currentTheme: Color.WHITE,
+  currentTextColor: Color.GREY,
   changeToDrakTheme: () => {},
-  changeToLightTheme:()=>{}
+  changeToLightTheme: () => {},
 };
 
 const ThemeContext = createContext<ThemeContextState>(contextDefaultValues);
@@ -32,24 +29,22 @@ const ThemeContextProvider: FC = ({ children }) => {
   );
 
   const changeToDrakTheme = () => {
-    setCurrentTheme("rgba(75, 85, 99, 1)");
-    setCurrentTextColor("white");
+    setCurrentTheme(Color.GREY);
+    setCurrentTextColor(Color.WHITE);
   };
 
   const changeToLightTheme = () => {
-    setCurrentTheme("white");
-    setCurrentTextColor("rgba(75, 85, 99, 1)");
+    setCurrentTheme(Color.WHITE);
+    setCurrentTextColor(Color.GREY);
   };
 
   return (
     <ThemeContext.Provider
       value={{
         currentTheme,
-        setCurrentTheme,
         currentTextColor,
-        setCurrentTextColor,
         changeToDrakTheme,
-        changeToLightTheme
+        changeToLightTheme,
       }}
     >
       {children}

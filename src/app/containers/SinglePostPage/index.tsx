@@ -16,7 +16,9 @@ const PageContainer = styled.div`
   ${tw`
     flex
     flex-col
+    h-full
     w-full
+    mt-16
 `}
 `;
 

@@ -39,7 +39,6 @@ const NavItem = styled.li<{ menu?: any }>`
     text-base
     md:text-lg
     text-center
-    text-black
     mr-1
     md:mr-5
     cursor-pointer

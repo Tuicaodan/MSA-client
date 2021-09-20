@@ -13,6 +13,7 @@ const ProfileContainer = styled.div`
     border-b-2
     mb-4
     mt-6
+    border-gray-400
     `}
 `;
 

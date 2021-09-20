@@ -28,6 +28,7 @@ const SubmissionForm = styled.form`
       w-12
       rounded-md
       mx-4
+      text-gray-500
     `}
   }
   input {
@@ -38,6 +39,7 @@ const SubmissionForm = styled.form`
       px-3
       text-sm
       overflow-scroll
+      text-gray-500
     `}
   }
   input:focus {

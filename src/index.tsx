@@ -10,12 +10,13 @@ import graphQLClient from "./GraphQLClient";
 import { BrowserRouter as Router } from "react-router-dom";
 import ThemeContextProvider from "./context/ThemeContext";
 
+
 ReactDOM.render(
   <Router>
     <ApolloProvider client={graphQLClient}>
       <React.StrictMode>
         <ThemeContextProvider>
-          <App />
+            <App />
         </ThemeContextProvider>
       </React.StrictMode>
     </ApolloProvider>
