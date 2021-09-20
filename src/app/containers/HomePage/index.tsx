@@ -14,6 +14,7 @@ const PageContainer = styled.div`
     flex-row
     px-10
     mt-16
+    h-auto
     `}
 `;
 

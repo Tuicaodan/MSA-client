@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useThemeContext } from "../../../context/ThemeContext";
+import { Color } from "../../../models/color.modle";
 
-import WebLogoImg from "../../../assets/images/instagram-logo-24.png";
+import WebLogoImgLight from "../../../assets/images/logo-light.png";
+import WebLogoImgDark from "../../../assets/images/logo-dark.png";
 
 const LogoContainer = styled.div`
   ${tw`
@@ -18,30 +21,39 @@ const LogoText = styled.div`
     md:text-2xl
     font-bold
     text-black
-    m-1
+    mx-1
 `};
 `;
 
 const Image = styled.div`
   width: auto;
+  min-width: 150px;
   ${tw`
-    h-6
+    h-7
     md:h-9
-`}
-  img {
+    ml-1
+`} img {
     width: auto;
     height: 100%;
   }
 `;
 
 function Logo() {
+  const { currentTheme } = useThemeContext();
+
   return (
     <Link to={"/home"}>
       <LogoContainer>
-        <Image>
-          <img src={WebLogoImg} alt="web logo" />
-        </Image>
-        <LogoText>Youtagram</LogoText>
+        {currentTheme == Color.WHITE && (
+          <Image>
+            <img src={WebLogoImgLight} alt="web logo" />
+          </Image>
+        )}
+        {currentTheme == Color.GREY && (
+          <Image>
+            <img src={WebLogoImgDark} alt="web logo" />
+          </Image>
+        )}
       </LogoContainer>
     </Link>
   );
