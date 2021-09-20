@@ -4,7 +4,7 @@ import tw from "twin.macro";
 import heatIcon from "../../../../../assets/images/heat.png";
 
 interface PopularPostProps {
-  title: string;
+  title: string|null;
   commentNum: number;
 }
 
@@ -15,6 +15,7 @@ const PostContainer = styled.div`
     w-full
     border-b-2
     mt-3
+    hover:text-gray-400
     `}    
 `;
 
@@ -25,6 +26,7 @@ const PostTitle = styled.span`
     text-sm
     mr-1
     my-auto
+    
 `}
 `;
 const HeatImg = styled.span`

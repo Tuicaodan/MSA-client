@@ -30,6 +30,7 @@ const HeaderContainer = styled.div`
     flex-row
     justify-between
     my-auto
+    hover:text-gray-400
 `}
 `;
 

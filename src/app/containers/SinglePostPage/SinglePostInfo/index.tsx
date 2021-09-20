@@ -63,6 +63,7 @@ const AuthorInfo = styled.div`
       flex
       flex-row
       justify-start
+      hover:text-gray-400
   `}
 `;
 

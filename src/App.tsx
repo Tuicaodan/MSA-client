@@ -24,7 +24,22 @@ interface StyleProps {
   textColor?: string;
 }
 
-const AppContainer = styled.div<StyleProps>`
+const PageContainer = styled.div<StyleProps>`
+  ${tw`
+  w-full
+  h-full
+  flex
+  flex-row
+  transition
+  duration-300
+  ease-in-out
+  
+`}
+  background: ${(p) => p.backgroundColor};
+  color: ${(p) => p.textColor};
+`;
+
+const AppContainer = styled.div`
   ${tw`
     w-full
     h-full
@@ -34,8 +49,6 @@ const AppContainer = styled.div<StyleProps>`
     px-10
     mb-0
   `}
-  background: ${(p) => p.backgroundColor};
-  color: ${(p) => p.textColor};
 `;
 
 const App = () => {
@@ -50,24 +63,26 @@ const App = () => {
       <AuthContextProvider>
         <PostsContextProvider>
           <SearchContextProvider>
-            <NavBar />
-            <AppContainer
+            <PageContainer
               backgroundColor={currentTheme}
               textColor={currentTextColor}
             >
-              <Switch>
-                <Route path="/home" exact render={() => <HomePage />} />
-                <Route exact path="/">
-                  <Redirect to="/home" />
-                </Route>
-                <Route path="/post/:id" exact>
-                  <SinglePostPage />
-                </Route>
-                <Route path="/user/:id" exact>
-                  <UserPage />
-                </Route>
-              </Switch>
-            </AppContainer>
+              <NavBar />
+              <AppContainer>
+                <Switch>
+                  <Route path="/home" exact render={() => <HomePage />} />
+                  <Route exact path="/">
+                    <Redirect to="/home" />
+                  </Route>
+                  <Route path="/post/:id" exact>
+                    <SinglePostPage />
+                  </Route>
+                  <Route path="/user/:id" exact>
+                    <UserPage />
+                  </Route>
+                </Switch>
+              </AppContainer>
+            </PageContainer>
           </SearchContextProvider>
         </PostsContextProvider>
       </AuthContextProvider>

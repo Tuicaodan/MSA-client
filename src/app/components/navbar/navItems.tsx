@@ -42,10 +42,8 @@ const NavItem = styled.li<{ menu?: any }>`
     mr-1
     md:mr-5
     cursor-pointer
-    transition
-    duration-300
-    ease-in-out
-    hover:text-gray-700
+    
+    hover:text-gray-400
     flex
     justify-center
     my-auto

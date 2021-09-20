@@ -18,14 +18,16 @@ interface StyleProps {
 const NavbarContainer = styled.div<StyleProps>`
   min-height: 68px;
   ${tw`
-        w-full
-        flex
-        flex-row
-        items-center
-        lg:px-12
-        justify-between
-        fixed
-        top-0
+      w-full
+      flex
+      flex-row
+      items-center
+      lg:px-12
+      justify-between
+      fixed
+      top-0
+      transition
+      duration-300
     `};
   background: ${(p) => p.backgroundColor};
   color: ${(p) => p.textColor};
@@ -39,12 +41,17 @@ const ThemeButton = styled.div`
   h-6
   fixed
   left-12
-  bottom-6
+  bottom-1/2
 `}
 `;
 
 const NavBar = () => {
-  const { currentTheme, currentTextColor, changeToDrakTheme, changeToLightTheme} = useThemeContext();
+  const {
+    currentTheme,
+    currentTextColor,
+    changeToDrakTheme,
+    changeToLightTheme,
+  } = useThemeContext();
   const { data, error, loading } = useQuery(LOGINED_USER);
   // console.log(data)
   const { authUser, login, isLogin } = useAuthContext();
