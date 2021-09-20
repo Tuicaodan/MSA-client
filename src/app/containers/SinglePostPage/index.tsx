@@ -2,13 +2,12 @@ import React, { FC, useEffect, useState } from "react";
 import { useSearchContext } from "../../../context/SearchContext";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { usePostsContext } from "../../../context/PostsContext";
 import Video from "../../components/post/video";
 import Comment from "./SinglePostComments";
 import { useQuery } from "@apollo/client";
 import { POSTS, LOGINED_USER } from "../../../api/Queries";
-import Info from "../../components/post/postInfo";
 import SinglePostInfo from "./SinglePostInfo";
 import UserPosts from "./UserPosts";
 
@@ -33,13 +32,12 @@ const SinglePostConstainer = styled.div`
     m-auto
     shadow-lg
  `}
-  /* --box-shadow-color: #ffff;
-  box-shadow: 0px 2px 4px -1px var(--box-shadow-color); */
 `;
 const VideoAndCommentsContainer = styled.div`
   ${tw`
    flex
-   flex-row
+   md:flex-row
+   flex-col
    justify-center
    w-full
    m-auto
@@ -48,20 +46,21 @@ const VideoAndCommentsContainer = styled.div`
 
 const VideoContainer = styled.div`
   ${tw`
-
-   w-2/3
-    ml-0
-    
+   md:w-2/3
+   w-full
+    ml-0    
 `}
 `;
 
 const CommentsContainer = styled.div`
   ${tw`
-   w-1/3
+  w-full
+  h-48
+   md:w-1/3
   text-center
-  pl-5
+  md:pl-5
    m-auto
-   h-96
+   md:h-96
 `}
 `;
 
@@ -94,10 +93,6 @@ const SinglePostPage = () => {
   const { posts, updatePostsState } = usePostsContext();
 
   const { setWordEntered, setFilteredData } = useSearchContext();
-
-  //setWordEntered("");
-
-  //console.log(posts.length)
 
   const needFetching = posts.length == 0;
 

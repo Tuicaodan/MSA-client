@@ -40,7 +40,7 @@ const Image = styled.div`
     w-6
     rounded-full
     ml-2
-    mr-4
+    mr-2
     overflow-hidden
 `}
 `;

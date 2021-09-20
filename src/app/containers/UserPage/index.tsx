@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { usePostsContext } from "../../../context/PostsContext";
 import { useQuery } from "@apollo/client";
 import { POSTS, USER, LOGINED_USER } from "../../../api/Queries";
@@ -14,7 +14,6 @@ const PageContainer = styled.div`
   flex-col
    h-full
     mt-16
-
 `}
 `;
 

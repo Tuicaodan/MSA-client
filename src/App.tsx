@@ -9,13 +9,11 @@ import {
 import styled from "styled-components";
 import tw from "twin.macro";
 import HomePage from "./app/containers/HomePage";
-import AuthContext from "./context/AuthContext";
 import NavBar from "./app/components/navbar";
 import AuthContextProvider from "./context/AuthContext";
 import PostsContextProvider from "./context/PostsContext";
 import SearchContextProvider from "./context/SearchContext";
 import { useThemeContext } from "./context/ThemeContext";
-import Sidebar from "./app/containers/Sidebar";
 import SinglePostPage from "./app/containers/SinglePostPage";
 import UserPage from "./app/containers/UserPage";
 
@@ -46,7 +44,8 @@ const AppContainer = styled.div`
     flex
     flex-row
     justify-start
-    px-10
+    px-0
+    md:px-10
     mb-0
   `}
 `;

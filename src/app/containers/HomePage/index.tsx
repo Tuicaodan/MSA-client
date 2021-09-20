@@ -12,7 +12,8 @@ const PageContainer = styled.div`
     w-full
     flex
     flex-row
-    px-10
+    px-0
+    md:px-10
     mt-16
     h-auto
     `}

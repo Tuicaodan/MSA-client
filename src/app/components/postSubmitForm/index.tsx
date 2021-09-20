@@ -126,11 +126,6 @@ const SubmitForm = () => {
 
     if (hasTitle && hasUrl && hasDescription) {
       setIsReadyToPost(true);
-      // console.log({
-      //   "Post title: ": postTitle,
-      //   "Post url: ": youtubeUrl,
-      //   "Post description: ": postDescription,
-      // });
 
       try {
         const returnedData = await addPost({
@@ -140,20 +135,11 @@ const SubmitForm = () => {
             description: postDescription,
           },
         });
-        //console.log("This is the return data after add post: ")
-        //console.log(returnedData);
         const returnedPost = returnedData.data.addPost;
-        //console.log(returnedPost)
         returnedPost.author = returnedPost.author[0];
-        //console.log(returnedPost)
-        // console.log("in the submit form fc, returnedPost:")
-        // console.log(returnedPost)
 
         let updatedPosts = [returnedPost, ...posts];
         setPosts(updatedPosts);
-
-        //updatePostState(returnedPost);
-        //console.log(returnedPost)
       } catch (err) {
         console.log("This is the addPost error: " + err);
       }

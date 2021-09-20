@@ -1,29 +1,28 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { StringLiteralLike } from "typescript";
 import { usePostsContext } from "../../../../context/PostsContext";
 import { useSearchContext } from "../../../../context/SearchContext";
 
 const SearchBarContainer = styled.div`
   ${tw`
     shadow-md
-    
+    mt-0
 `}
 `;
 
 const SearchInputs = styled.div`
   ${tw`
     flex
-    
 `}
   input {
     ${tw`
     rounded-sm
     p-4
     h-6
-    w-72
+    w-32
+    md:w-72
     text-gray-500
     `}
   }
@@ -52,7 +51,8 @@ const SearchIcon = styled.div`
 const SearchResults = styled.div`
   ${tw`
     mt-1
-    w-72
+    w-32
+    md:w-72
     h-64    
     align-middle
     overflow-hidden
@@ -97,7 +97,6 @@ interface FilterData {
 }
 
 const SearchBar = () => {
-  //   const [filteredData, setFilteredData] = useState<any>([]);
 
   const { wordEntered, setWordEntered, filteredData, setFilteredData } =
     useSearchContext();

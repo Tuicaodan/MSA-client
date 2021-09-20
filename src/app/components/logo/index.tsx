@@ -10,19 +10,9 @@ import WebLogoImgDark from "../../../assets/images/logo-dark.png";
 
 const LogoContainer = styled.div`
   ${tw`
-flex
-items-center
+    flex
+    items-center
 `}
-`;
-
-const LogoText = styled.div`
-  ${tw`
-    text-xl
-    md:text-2xl
-    font-bold
-    text-black
-    mx-1
-`};
 `;
 
 const Image = styled.div`

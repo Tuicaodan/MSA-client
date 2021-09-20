@@ -60,13 +60,6 @@ const PostCard: FC<any> = ({ post }: PostProps) => {
     avatar_url: post.author.avatar_url,
   };
 
-  // const commentsInfo = {
-  //   comments: post.comments,
-  //   postId: post.id,
-  // };
-
-  //console.log(commentsInfo);
-
   return (
     <CardContainer>
       <PostHeader postInfo={postInfo} authorInfo={authorInfo} />

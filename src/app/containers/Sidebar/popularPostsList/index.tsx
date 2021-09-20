@@ -38,8 +38,6 @@ const PostsContainer = () => {
     }
   });
 
-  //console.log(hasCommentsPosts);
-
   hasCommentsPosts.sort((a: any, b: any) => {
     if (a.comments.length > b.comments.length) {
       return -1;

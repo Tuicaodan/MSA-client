@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import heatIcon from "../../../../../assets/images/heat.png";
 
 interface PopularPostProps {
   title: string|null;
@@ -18,8 +17,6 @@ const PostContainer = styled.div`
     hover:text-gray-400
     `}    
 `;
-
-
 
 const PostTitle = styled.span`
   ${tw`

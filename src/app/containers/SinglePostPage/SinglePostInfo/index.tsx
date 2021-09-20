@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 

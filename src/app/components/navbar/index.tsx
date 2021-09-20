@@ -23,7 +23,8 @@ const NavbarContainer = styled.div<StyleProps>`
       flex-row
       items-center
       lg:px-12
-      justify-between
+      sm:justify-between
+      justify-start
       fixed
       top-0
       transition
@@ -33,14 +34,18 @@ const NavbarContainer = styled.div<StyleProps>`
   color: ${(p) => p.textColor};
 `;
 
-const LogoContainer = styled.div``;
+const LogoContainer = styled.div`
+${tw`
+mt-1
+`}`;
 
 const ThemeButton = styled.div`
   ${tw`
   w-6
   h-6
   fixed
-  left-12
+  left-2
+  md:left-12
   bottom-1/2
 `}
 `;
@@ -59,13 +64,11 @@ const NavBar = () => {
   useEffect(() => {
     const getLoginedUser = async () => {
       if (!loading && !error) {
-        //console.log("in the sidebar useEffect");
         const AuthUser = {
           userId: data.loginedUser.id,
           username: data.loginedUser.username,
           avatar_url: data.loginedUser.avatar_url,
         };
-        //console.log(AuthUser)
         login(AuthUser);
       }
     };

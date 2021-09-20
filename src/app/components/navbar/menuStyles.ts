@@ -4,7 +4,7 @@ export default {
       width: "20px",
       height: "20px",
       right: "20px",
-      top: "20px",
+      top: "25px",
     },
     bmBurgerBars: {
       background: "#373a47",
@@ -29,6 +29,7 @@ export default {
       background: "#373a47",
       padding: "2.5em 1.5em 0",
       fontSize: "1.15em",
+      opacity:"0.95",
     },
     bmMorphShape: {
       fill: "#373a47",

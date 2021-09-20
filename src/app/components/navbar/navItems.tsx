@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
 import { slide as Menu } from "react-burger-menu";
@@ -9,9 +8,7 @@ import menuStyles from "./menuStyles";
 import { useAuthContext } from "../../../context/AuthContext";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../../api/Mutations";
-import { useHistory, useLocation, Link } from "react-router-dom";
-import { Redirect, Route, Switch } from "react-router";
-import HomePage from "../../containers/HomePage";
+import { useLocation, Link } from "react-router-dom";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -34,7 +31,7 @@ const List = styled.ul`
 `;
 
 const NavItem = styled.li<{ menu?: any }>`
-  padding-top: 11px;
+  padding-top: 13px;
   ${tw`
     text-base
     md:text-lg
@@ -56,29 +53,25 @@ const NavItem = styled.li<{ menu?: any }>`
   ${({ menu }) =>
     menu &&
     css`
+      padding-top: 13px;
       ${tw`
     text-white
     text-xl
-    mb-3
+    mb-6
     focus:text-white
   `}
     `}
 `;
 
-// export interface Login_login {
-//   id: string;
-//   jwt_token: string;
-//   username: string;
-//   avatar_url: string;
-// }
-
-// export interface Login {
-//   login: Login_login;
-// }
-
-// export interface LoginVariables {
-//   access_code: string;
-// }
+const Image = styled.div`
+  ${tw`
+    h-12
+    w-12
+    rounded-full
+    my-2    
+    overflow-hidden
+`}
+`;
 
 const NavItems = () => {
   const query = useQuery();
@@ -92,55 +85,6 @@ const NavItems = () => {
   //console.log(authUser);
 
   const token = localStorage.getItem("token");
-
-  // useEffect(() => {
-  //   const loginMethod = async () => {
-  //     const params = new URLSearchParams(window.location.search);
-  //     let code = params.get("code");
-  //     if (code != null) {
-  //       try {
-  //         const requestBody = {
-  //           query: `
-  //             mutation {
-  //               login(access_code: "${code}")
-  //             }
-  //           `,
-  //         };
-  //         fetch("http://localhost:4000/graphql", {
-  //           method: "POST",
-  //           body: JSON.stringify(requestBody),
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         })
-  //           .then((res) => {
-  //             if (res.status !== 200 && res.status !== 201) {
-  //               throw new Error("Login Failed");
-  //             }
-  //             return res.json();
-  //           })
-  //           .then((resData) => {
-  //             const loginedUser = JSON.parse(resData.data["login"]);
-  //             if (loginedUser === null) {
-  //               throw new Error("No user retrieved from github");
-  //             }
-  //             const AuthUser = {
-  //               userId: loginedUser.id,
-  //               username: loginedUser.username,
-  //               avatar_url: loginedUser.avatar_url,
-  //             };
-  //             login(AuthUser);
-  //             localStorage.setItem("token", loginedUser.jwy_token);
-  //           });
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //   };
-  //   if (!token) {
-  //     loginMethod();
-  //   }
-  // }, []);
 
   useEffect(() => {
     const loginMethod = async () => {
@@ -177,44 +121,55 @@ const NavItems = () => {
   const logoutHandler = () => {
     logout();
   };
-  //const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
 
-  // if (isMobile)
-  //   return (
-  //     <Menu right styles={menuStyles}>
-  //       <ListContainer>
-  //         <NavItem menu>
-  //           <a href="./">Home</a>
-  //         </NavItem>
-  //         <NavItem menu>Login</NavItem>
-  //         <NavItem menu>Post</NavItem>
-  //       </ListContainer>
-  //     </Menu>
-  //   );
+  const avatar_url = authUser.avatar_url;
 
-  //without token checking
-  // return (
-  //   <ListContainer>
-  //     <NavItem>
-  //       <a href="./">Home</a>
-  //     </NavItem>
+  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
 
-  //     <NavItem>
-  //       <a
-  //         href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
-  //       >
-  //         Login
-  //       </a>
-  //     </NavItem>
+  if (isMobile && !isLogin)
+    return (
+      <Menu right styles={menuStyles}>
+        <ListContainer>
+          <NavItem menu>
+            <a href="./">Home</a>
+          </NavItem>
+          <NavItem menu>
+            <a
+              href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
+            >
+              Login
+            </a>
+          </NavItem>
+        </ListContainer>
+      </Menu>
+    );
 
-  //     <NavItem>Post</NavItem>
-  //   </ListContainer>
-  // );
+  if (isMobile && isLogin)
+    return (
+      <Menu right styles={menuStyles}>
+        <ListContainer>
+          <NavItem menu>
+            <Image>
+              <img src={avatar_url ? avatar_url : ""} />
+            </Image>
+          </NavItem>
+          <NavItem menu>
+            <a href="./">Home</a>
+          </NavItem>
+          <NavItem menu>
+            <a href="javascript:void(0)" onClick={logoutHandler}>
+              Logout
+            </a>
+          </NavItem>
+        </ListContainer>
+      </Menu>
+    );
+
   return (
     <ListContainer>
       <List>
         <NavItem>
-        <Link to="/home">Home</Link>
+          <Link to="/home">Home</Link>
         </NavItem>
         {!isLogin && (
           <NavItem>

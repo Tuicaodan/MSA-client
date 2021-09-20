@@ -76,8 +76,6 @@ const CommentDisplay: FC<any> = ({
   userAvatar,
   userId,
 }) => {
-  //console.log(commentProps)
-
   const commentContent = comment;
   const commentDate = createDate == undefined ? "" : createDate;
   const date = new Date(parseInt(commentDate)).toLocaleDateString();
