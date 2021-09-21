@@ -92,3 +92,13 @@ export const UPDATE_POST = gql`
     }
   }
 `
+
+export const DELECT_POST = gql`
+  mutation DeletePost(
+    $id: String!
+  ){
+    deletePost(
+      id: $id
+    )
+  }
+`

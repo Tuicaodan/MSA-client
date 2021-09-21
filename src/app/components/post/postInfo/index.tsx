@@ -1,10 +1,11 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useHistory } from "react-router-dom";
 import { useAuthContext } from "../../../../context/AuthContext";
 import { usePostsContext } from "../../../../context/PostsContext";
 import { useMutation } from "@apollo/client";
-import { UPDATE_POST } from "../../../../api/Mutations";
+import { UPDATE_POST, DELECT_POST } from "../../../../api/Mutations";
 
 interface IPostInfo {
   id: string;
@@ -84,6 +85,7 @@ const ModifyContainer = styled.div`
       text-right
       cursor-pointer
       ml-3
+      border-b-2
     `}
   }
   h6:hover {
@@ -99,10 +101,12 @@ const Info: FC<InfoProps> = ({ postInfo, authorInfo }: InfoProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [postDescription, setPostDescription] = useState(postInfo.description);
 
-  const { findAndUpdatePostState } = usePostsContext();
-  const [updatePost, { data, loading, error }] = useMutation(UPDATE_POST);
+  const { findAndUpdatePostState, findAndDeletePostState } = usePostsContext();
+  const [updatePost] = useMutation(UPDATE_POST);
+  const [deletePost] = useMutation(DELECT_POST);
 
   const { authUser } = useAuthContext();
+  const history = useHistory();
 
   const handleEditClick = (event: any) => {
     setPostDescription("");
@@ -141,6 +145,25 @@ const Info: FC<InfoProps> = ({ postInfo, authorInfo }: InfoProps) => {
     setIsEditing(false);
   };
 
+  const handleDeleteClick = async (event: any) => {
+    try {
+      const returnedData = await deletePost({
+        variables: {
+          id: postInfo.id,
+        },
+      });
+      const returnedPost = returnedData.data.deletePost;
+
+      if (returnedPost == "Post deleted") {
+        findAndDeletePostState(postInfo.id);
+        let path = `/home`;
+        history.push(path);
+      }
+    } catch (err) {
+      console.log("This is the deletePost error: " + err);
+    }
+  };
+
   return (
     <SectionContainer>
       {!isEditing && (
@@ -171,6 +194,7 @@ const Info: FC<InfoProps> = ({ postInfo, authorInfo }: InfoProps) => {
               <h6 onClick={handleCancelClick}>Cancel</h6>
             </>
           )}
+          <h6 onClick={handleDeleteClick}>Delete Post</h6>
         </ModifyContainer>
       )}
     </SectionContainer>

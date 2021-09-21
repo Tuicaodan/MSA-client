@@ -99,7 +99,7 @@ const SubmitForm = () => {
     setIsPosting(result);
   };
 
-  const { posts, updatePostsState, setPosts } = usePostsContext();
+  const { posts, updatePostsState, updatePostState } = usePostsContext();
   const [postTitle, setPostTitle] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [postDescription, setPostDescription] = useState("");
@@ -138,8 +138,9 @@ const SubmitForm = () => {
         const returnedPost = returnedData.data.addPost;
         returnedPost.author = returnedPost.author[0];
 
-        let updatedPosts = [returnedPost, ...posts];
-        setPosts(updatedPosts);
+        updatePostState(returnedPost)
+        // let updatedPosts = [returnedPost, ...posts];
+        // setPosts(updatedPosts);
       } catch (err) {
         console.log("This is the addPost error: " + err);
       }

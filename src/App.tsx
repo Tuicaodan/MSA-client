@@ -69,7 +69,9 @@ const App = () => {
               <NavBar />
               <AppContainer>
                 <Switch>
-                  <Route path="/home" exact render={() => <HomePage />} />
+                  <Route path="/home" exact>
+                    <HomePage />
+                  </Route>
                   <Route exact path="/">
                     <Redirect to="/home" />
                   </Route>

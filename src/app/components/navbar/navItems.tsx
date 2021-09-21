@@ -131,7 +131,7 @@ const NavItems = () => {
       <Menu right styles={menuStyles}>
         <ListContainer>
           <NavItem menu>
-            <a href="./">Home</a>
+            <Link to="/home">Home</Link>
           </NavItem>
           <NavItem menu>
             <a
@@ -154,7 +154,7 @@ const NavItems = () => {
             </Image>
           </NavItem>
           <NavItem menu>
-            <a href="./">Home</a>
+            <Link to="/home">Home</Link>
           </NavItem>
           <NavItem menu>
             <a href="javascript:void(0)" onClick={logoutHandler}>

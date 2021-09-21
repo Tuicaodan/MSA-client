@@ -25,20 +25,20 @@ interface IPost {
 
 type PostsContextState = {
   posts: IPost[];
-  setPosts: (posts: IPost[]) => void;
   updatePostsState: (posts: IPost[]) => void;
   updatePostState: (post: IPost) => void;
   findAndUpdatePostState: (post: IPost) => void;
   findAndUpdatePostCommentState: (comment: IComment, postId: string) => void;
+  findAndDeletePostState: (postId: string) => void;
 };
 
 const contextDefaultValues: PostsContextState = {
   posts: [],
-  setPosts: (posts: IPost[]) => {},
   updatePostsState: (posts: IPost[]) => {},
   updatePostState: (post: IPost) => {},
   findAndUpdatePostState: (post: IPost) => {},
   findAndUpdatePostCommentState: (comment: IComment, postId: string) => {},
+  findAndDeletePostState: (postId: string) => {},
 };
 
 export const PostsContext =
@@ -55,36 +55,23 @@ const PostsContextProvider: FC = ({ children }) => {
   };
 
   const updatePostState = (apiReturnPost: IPost) => {
-    console.log("before updatePostState posts[]:");
-    console.log(posts);
-    const updatedPosts = [apiReturnPost, ...posts];
-    console.log("after combine the return post to exsiting posts:");
-    console.log(updatedPosts);
-    setPosts(updatedPosts);
-    console.log("after updatePostState posts[]:");
-    console.log(posts);
+    setPosts((prevPosts) => [apiReturnPost, ...prevPosts]);
   };
 
   const findAndUpdatePostState = (apiReturnPost: IPost) => {
-    console.log("in findAndUpdatePostState");
-    console.log("returned post")
-    console.log(apiReturnPost)
-    console.log("current posts")
-    console.log(posts)
     const updatedPosts = posts.map((post) => {
-      console.log(post.id);
-      console.log(apiReturnPost.id);
       if (post.id === apiReturnPost.id) {
         return apiReturnPost;
       } else {
         return post;
       }
     });
-    console.log("updatedPosts")
-    console.log(updatedPosts)
     setPosts(updatedPosts);
-    console.log("after update posts")
-    console.log(posts)
+  };
+
+  const findAndDeletePostState = (postId: string) => {
+    const updatedPosts = posts.filter((post) => post.id != postId);
+    setPosts(updatedPosts);
   };
 
   const findAndUpdatePostCommentState = (
@@ -110,11 +97,11 @@ const PostsContextProvider: FC = ({ children }) => {
     <PostsContext.Provider
       value={{
         posts,
-        setPosts,
         updatePostsState,
         updatePostState,
         findAndUpdatePostState,
         findAndUpdatePostCommentState,
+        findAndDeletePostState,
       }}
     >
       {children}

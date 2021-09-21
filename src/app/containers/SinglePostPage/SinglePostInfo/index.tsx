@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useAuthContext } from "../../../../context/AuthContext";
 import { usePostsContext } from "../../../../context/PostsContext";
 import { useMutation } from "@apollo/client";
-import { UPDATE_POST } from "../../../../api/Mutations";
+import { UPDATE_POST, DELECT_POST } from "../../../../api/Mutations";
 
 interface IPostInfo {
   id: string;
@@ -118,6 +118,7 @@ const ModifyContainer = styled.div`
       text-right
       cursor-pointer
       ml-3
+      border-b-2
     `}
   }
   h6:hover {
@@ -133,10 +134,12 @@ const SinglePostInfo = ({ postInfo, authorInfo }: any) => {
   const [isEditing, setIsEditing] = useState(false);
   const [postDescription, setPostDescription] = useState(postInfo.description);
 
-  const { findAndUpdatePostState } = usePostsContext();
-  const [updatePost, { data, loading, error }] = useMutation(UPDATE_POST);
+  const { findAndUpdatePostState, findAndDeletePostState } = usePostsContext();
+  const [updatePost] = useMutation(UPDATE_POST);
+  const [deletePost] = useMutation(DELECT_POST);
 
   const { authUser } = useAuthContext();
+  const history = useHistory();
 
   const handleEditClick = (event: any) => {
     setPostDescription("");
@@ -173,6 +176,25 @@ const SinglePostInfo = ({ postInfo, authorInfo }: any) => {
       console.log("This is the updatePost error: " + err);
     }
     setIsEditing(false);
+  };
+
+  const handleDeleteClick = async (event: any) => {
+    try {
+      const returnedData = await deletePost({
+        variables: {
+          id: postInfo.id,
+        },
+      });
+      const returnedPost = returnedData.data.deletePost;
+
+      if (returnedPost == "Post deleted") {
+        findAndDeletePostState(postInfo.id);
+        let path = `/home`;
+        history.push(path);
+      }
+    } catch (err) {
+      console.log("This is the deletePost error: " + err);
+    }
   };
 
   return (
@@ -213,6 +235,7 @@ const SinglePostInfo = ({ postInfo, authorInfo }: any) => {
                 <h6 onClick={handleCancelClick}>Cancel</h6>
               </>
             )}
+            <h6 onClick={handleDeleteClick}>Delete Post</h6>
           </ModifyContainer>
         )}
       </PostInfo>

@@ -16,37 +16,29 @@ const ListContainer = styled.div`
 `}
 `;
 
-const ComponentUsingUseContext = () => {
-  const { posts } = usePostsContext();
-
-  return (
-    <div>
-      {posts.map((eachPost) => {
-        return <PostCard key={eachPost.id} post={eachPost} />;
-      })}
-    </div>
-  );
-};
 
 const PostList = () => {
-  const { updatePostsState } = usePostsContext();
+  const { posts, updatePostsState } = usePostsContext();
 
-  const { data, error, loading } = useQuery(POSTS);
+  const needFetching = posts.length == 0;
+
+  const { data, error, loading } = useQuery(POSTS, { skip: !needFetching });
 
   useEffect(() => {
-    if (!loading && !error) {
+    if (!loading && !error && needFetching) {
       const dataPosts = data.posts.map((post: any) => ({
         ...post,
         author: post.author[0],
       }));
-
       updatePostsState(dataPosts);
     }
   }, [data]);
 
   return (
     <ListContainer>
-      <ComponentUsingUseContext />
+      {posts.map((eachPost) => {
+        return <PostCard key={eachPost.id} post={eachPost} />;
+      })}
     </ListContainer>
   );
 };
