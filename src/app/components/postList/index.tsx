@@ -16,9 +16,9 @@ const ListContainer = styled.div`
 `}
 `;
 
-
 const PostList = () => {
   const { posts, updatePostsState } = usePostsContext();
+  //console.log(posts);
 
   const needFetching = posts.length == 0;
 

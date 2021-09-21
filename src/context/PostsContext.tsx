@@ -54,8 +54,8 @@ const PostsContextProvider: FC = ({ children }) => {
     setPosts(updatedPosts);
   };
 
-  const updatePostState = (apiReturnPost: IPost) => {
-    setPosts((prevPosts) => [apiReturnPost, ...prevPosts]);
+  const updatePostState = async (apiReturnPost: IPost) => {
+    await setPosts((prevPosts) => [apiReturnPost, ...prevPosts]);
   };
 
   const findAndUpdatePostState = (apiReturnPost: IPost) => {
