@@ -118,6 +118,7 @@ const SinglePostPage = () => {
     title: singlePost ? singlePost.title : "",
     description: singlePost ? singlePost.description : "",
     createdAt: singlePost ? singlePost.createdAt : "",
+    youtube_url: singlePost ? singlePost.youtube_url : "",
   };
 
   const authorInfo = {

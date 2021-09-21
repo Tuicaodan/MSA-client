@@ -52,6 +52,7 @@ const PostCard: FC<any> = ({ post }: PostProps) => {
     title: post.title,
     description: post.description,
     createdAt: post.createdAt,
+    youtube_url: post.youtube_url,
   };
 
   const authorInfo = {

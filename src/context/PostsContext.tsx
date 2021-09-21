@@ -66,7 +66,11 @@ const PostsContextProvider: FC = ({ children }) => {
   };
 
   const findAndUpdatePostState = (apiReturnPost: IPost) => {
-    console.log("post id from PostsContext");
+    console.log("in findAndUpdatePostState");
+    console.log("returned post")
+    console.log(apiReturnPost)
+    console.log("current posts")
+    console.log(posts)
     const updatedPosts = posts.map((post) => {
       console.log(post.id);
       console.log(apiReturnPost.id);
@@ -76,7 +80,11 @@ const PostsContextProvider: FC = ({ children }) => {
         return post;
       }
     });
+    console.log("updatedPosts")
+    console.log(updatedPosts)
     setPosts(updatedPosts);
+    console.log("after update posts")
+    console.log(posts)
   };
 
   const findAndUpdatePostCommentState = (

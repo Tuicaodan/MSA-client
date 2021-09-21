@@ -55,3 +55,40 @@ export const ADD_POST = gql`
     }
   }
 `;
+
+export const UPDATE_POST = gql`
+  mutation UpdatePost(
+    $id: String!
+    $title: String!
+    $youtube_url: String!
+    $description: String!
+  ){
+    updatePost(
+      id: $id
+      title: $title
+      youtube_url: $youtube_url
+      description: $description
+    ){
+      id
+      title
+      youtube_url
+      description
+      createdAt
+      author {
+        id
+        username
+        avatar_url
+      }
+      comments {
+        id
+        comment
+        createdAt
+        user {
+          id
+          username
+          avatar_url
+        }
+      }
+    }
+  }
+`

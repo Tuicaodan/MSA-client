@@ -1,12 +1,17 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useAuthContext } from "../../../../context/AuthContext";
+import { usePostsContext } from "../../../../context/PostsContext";
+import { useMutation } from "@apollo/client";
+import { UPDATE_POST } from "../../../../api/Mutations";
 
 interface IPostInfo {
   id: string;
   title: string;
   description: string;
   createdAt: string;
+  youtube_url: string;
 }
 
 interface IAuthorInfo {
@@ -20,6 +25,16 @@ interface InfoProps {
   authorInfo: IAuthorInfo;
 }
 
+const SectionContainer = styled.div`
+  ${tw`
+    w-full
+    flex
+    flex-col
+    my-4
+    px-5
+  `}
+`;
+
 const InfoContainer = styled.div`
   ${tw`
       w-full
@@ -27,8 +42,8 @@ const InfoContainer = styled.div`
       flex-col
       justify-start
       ml-0
-      my-4
-      px-5
+      
+      
   `}
   h2 {
     ${tw`
@@ -46,17 +61,119 @@ const InfoContainer = styled.div`
       text-sm
     `}
   }
+  textarea {
+    ${tw`
+      h-36
+      text-sm
+      text-justify
+    `}
+  }
 `;
 
-const Info: FC<InfoProps> = ({ postInfo }: InfoProps) => {
+const ModifyContainer = styled.div`
+  ${tw`
+  w-full
+  flex
+  flex-row
+  justify-end
+`}
+  h6 {
+    ${tw`
+      text-gray-400
+      text-sm
+      text-right
+      cursor-pointer
+      ml-3
+    `}
+  }
+  h6:hover {
+    ${tw`
+      text-gray-500
+    `}
+  }
+`;
+
+const Info: FC<InfoProps> = ({ postInfo, authorInfo }: InfoProps) => {
   const date = new Date(parseInt(postInfo.createdAt)).toLocaleDateString();
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [postDescription, setPostDescription] = useState(postInfo.description);
+
+  const { findAndUpdatePostState } = usePostsContext();
+  const [updatePost, { data, loading, error }] = useMutation(UPDATE_POST);
+
+  const { authUser } = useAuthContext();
+
+  const handleEditClick = (event: any) => {
+    setPostDescription("");
+    setPostDescription(postInfo.description);
+    setIsEditing(true);
+  };
+
+  const handleCancelClick = (event: any) => {
+    setPostDescription(postInfo.description);
+    setIsEditing(false);
+  };
+
+  const handleSaveClick = async (event: any) => {
+    const hasDescription = postDescription !== "";
+
+    if (!hasDescription) {
+      alert("missing description");
+    }
+
+    try {
+      const returnedData = await updatePost({
+        variables: {
+          id: postInfo.id,
+          title: postInfo.title,
+          youtube_url: postInfo.youtube_url,
+          description: postDescription,
+        },
+      });
+      const returnedPost = returnedData.data.updatePost;
+      returnedPost.author = returnedPost.author[0];
+
+      findAndUpdatePostState(returnedPost);
+    } catch (err) {
+      console.log("This is the updatePost error: " + err);
+    }
+    setIsEditing(false);
+  };
+
   return (
-    <InfoContainer>
-      <h2>{postInfo.title}</h2>
-      <h6>Posted on: {date}</h6>
-      <p>{postInfo.description}</p>
-    </InfoContainer>
+    <SectionContainer>
+      {!isEditing && (
+        <InfoContainer>
+          <h2>{postInfo.title}</h2>
+          <h6>Posted on: {date}</h6>
+          <p>{postInfo.description}</p>
+        </InfoContainer>
+      )}
+      {isEditing && (
+        <InfoContainer>
+          <h2>{postInfo.title}</h2>
+          <h6>Posted on: {date}</h6>
+          <textarea
+            id="description"
+            placeholder={postInfo.description}
+            value={postDescription}
+            onChange={(e) => setPostDescription(e.target.value)}
+          />
+        </InfoContainer>
+      )}
+      {authUser.userId == authorInfo.id && (
+        <ModifyContainer>
+          {!isEditing && <h6 onClick={handleEditClick}>Edit</h6>}
+          {isEditing && (
+            <>
+              <h6 onClick={handleSaveClick}>Save</h6>
+              <h6 onClick={handleCancelClick}>Cancel</h6>
+            </>
+          )}
+        </ModifyContainer>
+      )}
+    </SectionContainer>
   );
 };
 
