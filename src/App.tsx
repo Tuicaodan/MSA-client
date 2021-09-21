@@ -54,7 +54,6 @@ const App = () => {
   const { currentTheme, currentTextColor } = useThemeContext();
 
   useEffect(() => {
-    console.log("color theme changed");
   }, [currentTheme]);
 
   return (

@@ -59,24 +59,19 @@ const SubmitCommentForm: FC<SubmitCommentProps> = (props) => {
     event.preventDefault();
     const hasContent = commentContent !== "";
 
-    console.log(commentContent)
-    console.log(props.postId)
     if (!hasContent) {
       alert("Did you forgot to comment before submitting?");
     }
     if (hasContent) {
       setIsReadyToSubmit(true);
       try {
-        console.log("before adding comment")
         const returnedData = await addComment({
           variables: {
             comment: commentContent,
             postId: props.postId,
           },
         });
-        console.log(returnedData)
         const returnedComment = returnedData.data.addComment;
-        console.log(returnedComment)
         findAndUpdatePostCommentState(returnedComment, props.postId);
       } catch (err) {
         console.log("This is the addComment error: " + err);

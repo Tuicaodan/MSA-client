@@ -62,13 +62,13 @@ export const UPDATE_POST = gql`
     $title: String!
     $youtube_url: String!
     $description: String!
-  ){
+  ) {
     updatePost(
       id: $id
       title: $title
       youtube_url: $youtube_url
       description: $description
-    ){
+    ) {
       id
       title
       youtube_url
@@ -91,14 +91,10 @@ export const UPDATE_POST = gql`
       }
     }
   }
-`
+`;
 
 export const DELECT_POST = gql`
-  mutation DeletePost(
-    $id: String!
-  ){
-    deletePost(
-      id: $id
-    )
+  mutation DeletePost($id: String!) {
+    deletePost(id: $id)
   }
-`
+`;

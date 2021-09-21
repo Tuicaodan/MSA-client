@@ -109,11 +109,9 @@ const UserPage = () => {
         author: post.author[0],
       }));
       updatePostsState(dataPosts);
-      console.log("triggle here #1");
     }
   }, [data]);
 
-  console.log(posts);
 
   const userPosts = posts.filter((post) => post.author.id == id);
 
@@ -136,8 +134,6 @@ const UserPage = () => {
     postsNum: !userPosts[0] ? 0 : userPostsNum,
   };
 
-  console.log(userPostsNum);
-  console.log(userCommentsNum);
 
   return (
     <PageContainer>
