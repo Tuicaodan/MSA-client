@@ -14,6 +14,7 @@ const PageContainder = styled.div`
         flex
         flex-col
         mt-10
+        mx-10
     `}
 `;
 const SkeletonForm = styled.div`
@@ -94,7 +95,6 @@ const SkeletonCard = () => {
         <SkeletonText textLength={`93%`} />
         <SkeletonText textLength={`93%`} />
         <SkeletonText textLength={`47%`} />
-        <Shimmer />
       </SkeletonCardContainer>
     </PageContainder>
   );

@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import SubmitForm from "../../components/postSubmitForm";
 import CardList from "../../components/postList";
+import { usePostsContext } from "../../../context/PostsContext";
 import { useAuthContext } from "../../../context/AuthContext";
 import { useSearchContext } from "../../../context/SearchContext";
+import { POSTS } from "../../../api/Queries";
 import Sidebar from "../Sidebar";
+import { useQuery } from "@apollo/client";
+import SkeletonHomePage from "../../components/skeletons/SkeletonHomePage";
 
 const PageContainer = styled.div`
   ${tw`
@@ -16,6 +20,7 @@ const PageContainer = styled.div`
     md:px-10
     mt-16
     h-auto
+    mx-10
     `}
 `;
 
@@ -48,16 +53,38 @@ function HomePage() {
     setFilteredData([]);
   }, []);
 
+  const { posts, updatePostsState } = usePostsContext();
+  //console.log(posts);
+
+  const needFetching = posts.length == 0;
+
+  const { data, error, loading } = useQuery(POSTS, { skip: !needFetching });
+
+  useEffect(() => {
+    if (!loading && !error && needFetching) {
+      const dataPosts = data.posts.map((post: any) => ({
+        ...post,
+        author: post.author[0],
+      }));
+      updatePostsState(dataPosts);
+    }
+  }, [data]);
+
   return (
-    <PageContainer>
-      <MainContentContaner>
-        {isLogin && <SubmitForm />}
-        <CardList />
-      </MainContentContaner>
-      <UserContentContainer>
-        <Sidebar />
-      </UserContentContainer>
-    </PageContainer>
+    <Fragment>
+      {loading && <SkeletonHomePage />}
+      {!loading && (
+        <PageContainer>
+          <MainContentContaner>
+            {isLogin && <SubmitForm />}
+            <CardList />
+          </MainContentContaner>
+          <UserContentContainer>
+            <Sidebar />
+          </UserContentContainer>
+        </PageContainer>
+      )}
+    </Fragment>
   );
 }
 
