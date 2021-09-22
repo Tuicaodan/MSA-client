@@ -10,7 +10,9 @@ const BarContainer = styled.div`
   ${tw`
         flex
         flex-col
-        mt-7
+        mt-10
+        h-96
+        ml-10
     `}
 `;
 
@@ -57,7 +59,7 @@ const SkeletonSideBar = () => {
       <SkeletonText textLength={`93%`} />
       <SkeletonText textLength={`47%`} />
       <SkeletonText textLength={`93%`} />
-      <SkeletonText textLength={`31%`} />
+      <SkeletonText textLength={`47%`} />
       <SkeletonText textLength={`93%`} />
       <SkeletonText textLength={`47%`} />
     </BarContainer>

@@ -15,10 +15,36 @@ const PageContainer = styled.div`
 `}
 `;
 
+const CardsContainer = styled.div`
+  ${tw`
+    w-full
+    flex
+    flex-col
+    mt-10
+    mx-2
+  `}
+`;
+
+const SkeletonForm = styled.div`
+  ${tw`
+        bg-gray-200
+        overflow-hidden
+        h-16
+        w-full
+        mb-10
+        rounded-md
+    `}
+`;
+
 const SkeletonHomePage = () => {
   return (
     <PageContainer>
-      <SkeletonCard />
+      <CardsContainer>
+        <SkeletonForm />
+        <SkeletonCard />
+        <SkeletonCard />
+        <SkeletonCard />
+      </CardsContainer>
       <SkeletonSideBar />
       <Shimmer />
     </PageContainer>

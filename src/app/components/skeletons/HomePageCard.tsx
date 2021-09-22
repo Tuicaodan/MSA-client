@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import Shimmer from "./Shimmer";
 
 interface StyleProps {
   avatarSize?: any;
@@ -13,20 +12,10 @@ const PageContainder = styled.div`
         w-full
         flex
         flex-col
-        mt-10
-        mx-10
+        pb-3
     `}
 `;
-const SkeletonForm = styled.div`
-  ${tw`
-        bg-gray-200
-        overflow-hidden
-        h-16
-        w-full
-        mb-10
-        rounded-md
-    `}
-`;
+
 
 const SkeletonCardContainer = styled.div`
   ${tw`
@@ -84,7 +73,6 @@ const SkeletonVideo = styled.div`
 const SkeletonCard = () => {
   return (
     <PageContainder>
-      <SkeletonForm />
       <SkeletonCardContainer>
         <SkeletonCardHeader>
           <SkeletonCardAvatar avatarSize={`24px`} />
