@@ -5,6 +5,7 @@ import tw from "twin.macro";
 import { usePostsContext } from "../../../context/PostsContext";
 import { POSTS } from "../../../api/Queries";
 import PostCard from "../post";
+import SkeletonCard from "../skeletons/HomePageCard";
 
 const ListContainer = styled.div`
   ${tw`
@@ -36,6 +37,14 @@ const PostList = () => {
 
   return (
     <ListContainer>
+      {loading && (
+        <>
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </>
+      )}
+
       {posts.map((eachPost) => {
         return <PostCard key={eachPost.id} post={eachPost} />;
       })}
