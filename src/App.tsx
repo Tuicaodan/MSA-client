@@ -24,14 +24,16 @@ interface StyleProps {
 
 const PageContainer = styled.div<StyleProps>`
   ${tw`
-  w-full
+  w-96
+  sm:w-full
+  max-w-7xl
   h-full
   flex
   flex-row
   transition
   duration-300
   ease-in-out
-  
+  m-auto
 `}
   background: ${(p) => p.backgroundColor};
   color: ${(p) => p.textColor};
@@ -53,8 +55,7 @@ const AppContainer = styled.div`
 const App = () => {
   const { currentTheme, currentTextColor } = useThemeContext();
 
-  useEffect(() => {
-  }, [currentTheme]);
+  useEffect(() => {}, [currentTheme]);
 
   return (
     <Router>

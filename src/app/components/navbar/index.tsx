@@ -18,7 +18,9 @@ interface StyleProps {
 const NavbarContainer = styled.div<StyleProps>`
   min-height: 68px;
   ${tw`
-      w-full
+      w-96
+      max-w-7xl
+      sm:w-full
       flex
       flex-row
       items-center
@@ -29,6 +31,7 @@ const NavbarContainer = styled.div<StyleProps>`
       top-0
       transition
       duration-300
+      m-auto
     `};
   background: ${(p) => p.backgroundColor};
   color: ${(p) => p.textColor};

@@ -36,7 +36,7 @@ const NavItem = styled.li<{ menu?: any }>`
     text-base
     md:text-lg
     text-center
-    mr-1
+    mr-3
     md:mr-5
     cursor-pointer
     
@@ -149,9 +149,11 @@ const NavItems = () => {
       <Menu right styles={menuStyles}>
         <ListContainer>
           <NavItem menu>
-            <Image>
-              <img src={avatar_url ? avatar_url : ""} />
-            </Image>
+            <Link to={`/user/${authUser.userId}`}>
+              <Image>
+                <img src={avatar_url ? avatar_url : ""} />
+              </Image>
+            </Link>
           </NavItem>
           <NavItem menu>
             <Link to="/home">Home</Link>

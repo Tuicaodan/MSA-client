@@ -21,15 +21,15 @@ export default {
     },
     bmMenuWrap: {
       position: "fixed",
-      width: "45%",
+      width: "40%",
       height: "100%",
       top: "0px",
+      opacity:"1"
     },
     bmMenu: {
       background: "#373a47",
       padding: "2.5em 1.5em 0",
       fontSize: "1.15em",
-      opacity:"0.95",
     },
     bmMorphShape: {
       fill: "#373a47",
