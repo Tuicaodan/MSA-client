@@ -45,7 +45,8 @@ const SinglePostContainer = styled.div`
   ${tw`
     my-3
     md:w-52
-    w-28
+    lg:w-64
+    w-48
     shadow-lg
     mr-6
 `}

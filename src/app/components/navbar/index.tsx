@@ -19,8 +19,9 @@ const NavbarContainer = styled.div<StyleProps>`
   min-height: 68px;
   ${tw`
       w-96
-      max-w-7xl
-      sm:w-full
+  sm:w-full
+  max-w-7xl
+  m-auto
       flex
       flex-row
       items-center
@@ -31,16 +32,16 @@ const NavbarContainer = styled.div<StyleProps>`
       top-0
       transition
       duration-300
-      m-auto
     `};
   background: ${(p) => p.backgroundColor};
   color: ${(p) => p.textColor};
 `;
 
 const LogoContainer = styled.div`
-${tw`
+  ${tw`
 mt-1
-`}`;
+`}
+`;
 
 const ThemeButton = styled.div`
   ${tw`

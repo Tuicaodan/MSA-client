@@ -9,11 +9,11 @@ import UserPosts from "../SinglePostPage/UserPosts";
 
 const PageContainer = styled.div`
   ${tw`
+  mt-60
     w-full
     flex
-  flex-col
-   h-full
-    mt-16
+    flex-col
+    h-full
 `}
 `;
 
@@ -65,9 +65,10 @@ const UserInfo = styled.div`
 
 const PostsContainer = styled.div`
   ${tw`
-  mt-24
+  mt-14
    mx-auto
    w-11/12
+   mb-72
 `}
   h2 {
     ${tw`
@@ -112,7 +113,6 @@ const UserPage = () => {
     }
   }, [data]);
 
-
   const userPosts = posts.filter((post) => post.author.id == id);
 
   const userPostsNum = userPosts.length;
@@ -133,7 +133,6 @@ const UserPage = () => {
     commentsNum: !userPosts[0] ? 0 : userCommentsNum,
     postsNum: !userPosts[0] ? 0 : userPostsNum,
   };
-
 
   return (
     <PageContainer>

@@ -24,16 +24,14 @@ interface StyleProps {
 
 const PageContainer = styled.div<StyleProps>`
   ${tw`
-  w-96
-  sm:w-full
-  max-w-7xl
+  w-full
   h-full
   flex
   flex-row
   transition
   duration-300
   ease-in-out
-  m-auto
+  justify-center
 `}
   background: ${(p) => p.backgroundColor};
   color: ${(p) => p.textColor};
@@ -41,7 +39,10 @@ const PageContainer = styled.div<StyleProps>`
 
 const AppContainer = styled.div`
   ${tw`
-    w-full
+    w-96
+    sm:w-full
+    max-w-7xl
+    m-auto
     h-full
     flex
     flex-row
@@ -49,6 +50,7 @@ const AppContainer = styled.div`
     px-0
     md:px-10
     mb-0
+    
   `}
 `;
 
