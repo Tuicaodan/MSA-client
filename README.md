@@ -1,44 +1,88 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Youtagram - a Youtube version of Instagram
 
-## Available Scripts
+> This is a web app that mock Instagram. Instead of post photos, login users can post Youtube video links. 
+> Users can also read and comment on posts. The author of the post is allowed to update or delete the post.
+> You can find a live demo [_here_](https://youtagram.azurewebsites.net).
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [General Info](#general-information)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Setup](#setup)
+- [How to use](#how-to-use)l
+## General Information
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- The aim of this project is to learn React, TypeSript, Apollo Client for GraphQL, Styled Components, TailwindCSS, OAuth and React Context API.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+## Screenshots
+- Home Page: <br />
+  ![homepage](./screenshot/homepage.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Home Page, dark theme: <br />
+  ![homepage-dark-theme](./screenshot/homepage-dark-theme.png)
 
-### `npm run build`
+- Home Page, login view: <br />
+  ![homepage-login](./screenshot/homepage-login.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Single Post Page: <br />
+  ![single-post-page](./screenshot/single-post-page.png)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- User Page: <br />
+  ![user-page](./screenshot/user-page.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Post Submission: <br />
+  ![post-submit](./screenshot/post-submit.png)
 
-### `npm run eject`
+- Post Editing: <br />
+  ![post-edit](./screenshot/post-edit.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- react: 17.0.2
+- typescript: 4.1.5
+- twin.macro: 2.6.2
+- react-router-dom: 5.2.0
+- react-burger-menu: 3.0.6
+- graphql: 15.5.1
+- react-router-dom: 5.2.0
+- react-burger-menu: 3.0.6
+- graphql: 8.5.1
+- craco/craco: 6.2.0
+- apollo/client: 3.4.7
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- React + TypeScript web app
+- Use Apollo Client to connect to a GraphQL API endpoint
+- Use Styled Components + TailwinCSS to simplify the styling
+- Responsive UI with react burger menu
+- Use OAuth for authentication
+- Use React Router to handle navigations
+- Dark mode toggle
+- Search function
+- Use lightweight React Context API to manage state(auth content/theme content/posts content/search content)
+- Skeletons views when loading
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Setup
+
+To run this project, install it locally using npm
+
+```bash
+$ npm install
+$ npm run start
+```
+
+You need to provide your own .env file, which should include:
+- REACT_APP_GITHUB_APP_ID=your own GITHUB_APP_ID
+- REACT_APP_GITHUB_CLIENT_ID=your own GITHUB_CLIENT_ID
+- REACT_APP_GITHUB_CLIENT_SECRET=your own GITHUB_CLIENT_SECRET
+- REACT_APP_REDIRECT_URI=your own REACT_APP_REDIRECT_URI
+
+You can use run the project locally:
+http://localhost:3000/
