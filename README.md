@@ -1,8 +1,8 @@
 # Youtagram - a Youtube version of Instagram
 
-> This is a web app that mock Instagram. Instead of post photos, login users can post Youtube video links. 
-> Users can also read and comment on posts. The author of the post is allowed to update or delete the post.
-> You can find a live demo [_here_](https://youtagram.azurewebsites.net).
+> - This is a web app that mock Instagram. Instead of post photos, login users can post Youtube video links. 
+> - Users can also read and comment on posts. The author of the post is allowed to update or delete the post.
+> - You can find a live demo [_here_](https://youtagram.azurewebsites.net).
 
 ## Table of Contents
 
@@ -79,10 +79,10 @@ $ npm run start
 ```
 
 You need to provide your own .env file, which should include:
-- REACT_APP_GITHUB_APP_ID=your own GITHUB_APP_ID
-- REACT_APP_GITHUB_CLIENT_ID=your own GITHUB_CLIENT_ID
-- REACT_APP_GITHUB_CLIENT_SECRET=your own GITHUB_CLIENT_SECRET
-- REACT_APP_REDIRECT_URI=your own REACT_APP_REDIRECT_URI
+> REACT_APP_GITHUB_APP_ID=your own GITHUB_APP_ID
+> REACT_APP_GITHUB_CLIENT_ID=your own GITHUB_CLIENT_ID
+> REACT_APP_GITHUB_CLIENT_SECRET=your own GITHUB_CLIENT_SECRET
+> REACT_APP_REDIRECT_URI=your own REACT_APP_REDIRECT_URI
 
 You can use run the project locally:
 http://localhost:3000/
