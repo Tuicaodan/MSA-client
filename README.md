@@ -7,11 +7,12 @@
 ## Table of Contents
 
 - [General Info](#general-information)
+- [Screenshots](#screenshots)
 - [Technologies Used](#technologies-used)
 - [Features](#features)
-- [Screenshots](#screenshots)
 - [Setup](#setup)
-- [How to use](#how-to-use)l
+
+
 ## General Information
 
 - The aim of this project is to learn React, TypeSript, Apollo Client for GraphQL, Styled Components, TailwindCSS, OAuth and React Context API.
